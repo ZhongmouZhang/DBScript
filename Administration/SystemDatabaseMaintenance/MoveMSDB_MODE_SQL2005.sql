@@ -1,0 +1,15 @@
+﻿ALTER DATABASE msdb 
+    MODIFY FILE (NAME=MSDBData, FILENAME= 'J:\MSSQL\Data\MSDBData.mdf');
+GO
+ALTER DATABASE msdb 
+    MODIFY FILE (NAME=MSDBLog, FILENAME= 'J:\MSSQL\Data\MSDBLog.ldf');
+GO
+
+
+ALTER DATABASE model 
+    MODIFY FILE (NAME=modeldev, FILENAME= 'J:\MSSQL\Data\model.mdf');
+GO
+ALTER DATABASE model 
+    MODIFY FILE (NAME=modellog, FILENAME= 'J:\MSSQL\Data\modellog.ldf');
+GO
+

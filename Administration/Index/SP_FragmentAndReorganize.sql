@@ -1,0 +1,20 @@
+ --dbcc showcontig('Message')
+
+-- all are online operation
+USE TEST_DataCloset
+GO
+SELECT CAST(DB_NAME(DATABASE_ID) AS VARCHAR(20)) AS 'DatabaseName',
+       CAST(OBJECT_NAME([OBJECT_ID]) AS VARCHAR(20)) AS 'TableName',
+       INDEX_ID,
+       CAST(INDEX_TYPE_DESC AS VARCHAR(20)) AS INDEX_TYPE_DESC,
+       AVG_FRAGMENTATION_IN_PERCENT
+FROM   SYS.DM_DB_INDEX_PHYSICAL_STATS (DB_ID('TEST_DataCloset'),OBJECT_ID('dbo.message'),NULL,NULL,NULL );
+GO
+
+
+ALTER INDEX PK_Message ON message
+REORGANIZE ;
+
+
+ALTER INDEX IX_Message ON message
+REORGANIZE ;
