@@ -16,3 +16,4 @@ select name from master.[dbo].[sysxlogins] where name is not null order by name
 
 
 select name from master.[sys].[syslogins] order by name
+
