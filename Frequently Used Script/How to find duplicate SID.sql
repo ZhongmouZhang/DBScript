@@ -1,0 +1,1 @@
+﻿SELECT name FROM sysxlogins WHERE sid = SUSER_SID ('PHSABC\Claire.Ma')
