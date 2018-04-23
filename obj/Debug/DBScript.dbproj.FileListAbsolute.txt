@@ -1,0 +1,6 @@
+C:\work\DBScript\sql\debug\DBScript_Database.sqlsettings
+C:\work\DBScript\sql\debug\DBScript_Database.sqldeployment
+C:\work\DBScript\sql\debug\DBScript_Database.sqlcmdvars
+C:\work\DBScript\sql\debug\DBScript.deploymanifest
+C:\work\DBScript\sql\debug\DBScript.dbschema
+C:\work\DBScript\obj\Debug\DBScript.dbschema

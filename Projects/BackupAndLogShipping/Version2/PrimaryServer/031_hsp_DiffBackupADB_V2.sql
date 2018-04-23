@@ -1,0 +1,50 @@
+   
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].hsp_DiffBackupADB_V2') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure [dbo].hsp_DiffBackupADB_V2
+GO
+
+ -- hsp_FullBackupADB_V2 'AdventureWorks', '2007-05-02 00:00:00'
+CREATE         proc dbo.hsp_DiffBackupADB_V2
+@dbname varchar(100),
+@now datetime
+
+as
+declare @path varchar(512)
+declare @stt varchar (5000)
+declare @subject_str varchar(1000)
+declare @from_str varchar(500)
+declare @dest varchar(500)
+
+select top 1 @path = path from master.dbo.BackupParameter where dbname=@dbname  and backuptype='Differential'
+		 
+select @dest=@path + @dbname + '_Diff_' + convert(varchar,getdate(),112)+'_' 
+		+ 
+		case when datepart(hour,getdate())>9 then convert(varchar,datepart(hour,getdate()))
+			 else '0' + convert(varchar,datepart(hour,getdate()))
+		end
+		+
+		case when datepart(minute,getdate())>9 then  convert(varchar,datepart(minute,getdate()))
+			 else '0' + convert(varchar,datepart(minute,getdate()))
+		end
+		+ 
+		case when datepart(second,getdate())>9 then  convert(varchar,datepart(second,getdate()))
+			 else '0' + convert(varchar,datepart(second,getdate()))
+		end
+		+'.bak'
+	-- select @dest
+
+backup database @dbname to Disk=@dest with differential,init
+if (@@error != 0)
+begin
+	set @subject_str = 'backup of the ' +@dbname+ ' database on server ' + @@Servername +' failed'
+	EXEC usp_sendcdomail
+		@From = 'dbserver@phsa.ca', 
+		@To = 'phsaimitmonitor@phsa.ca;jzhang2@phsa.ca;rgrover2@phsa.ca',
+		@Subject = @subject_str, 
+		@Body = 'Please check the backup on the server'
+end
+else
+begin
+	insert into master.dbo.backuplog (DBname,BackupType ,backuptime ,Source_filename,status )
+	values (@dbname, 'Diff', @now, @dest, 'Backup')
+end

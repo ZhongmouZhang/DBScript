@@ -1,0 +1,17 @@
+﻿-- =============================================
+-- Script Template
+-- =============================================
+select convert(varchar,year([CREATION DATE]))+ (right ('0' + convert(varchar,month([CREATION DATE])),2)) [year], 
+	OWNERGROUP, [TICKET NUMBER], [AFFECTED PERSON], 
+	[BRIEF DESCRIPTION],AFFECTED_PERSON_HA,INTERNALPRIORITY,[OWNER NAME], [TICKET TYPE],
+	[CREATION DATE],[STATUS DATE],[BUSINESS AGE - DAYS]
+from [SMt].[IBMTickets]
+where OWNERGROUP in ('HSSBC-ACCESS REQUESTS','HSSBC-ACTIVE DIRECTORY OPS & SUPPORT','HSSBC-MESSAGING','HSSBC-TIS DATABASE SERVICES','HSSBC-UNIFIED COMMUNICATIONS')
+order by [creation date], ownergroup
+
+
+select OWNERGROUP, [OWNER NAME], count(*)
+from [SMt].[IBMTickets]
+where OWNERGROUP in ('HSSBC-ACCESS REQUESTS','HSSBC-ACTIVE DIRECTORY OPS & SUPPORT','HSSBC-MESSAGING','HSSBC-TIS DATABASE SERVICES','HSSBC-UNIFIED COMMUNICATIONS')
+group by OWNERGROUP, [OWNER NAME]
+order by OWNERGROUP, count(*) desc
