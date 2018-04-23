@@ -1,0 +1,1836 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <PostUpgradeAddToSCC>;C:\technology\Git_Repository\SQL_Utility\DBScript.root\DBScript\DBScript.dbproj;C:\technology\Git_Repository\SQL_Utility\DBScript.root\DBScript\Connections.txt;C:\technology\Git_Repository\SQL_Utility\DBScript.root\DBScript\Scripts\Post-Deployment\Script.PostDeployment.sql;C:\technology\Git_Repository\SQL_Utility\DBScript.root\DBScript\Scripts\Pre-Deployment\Script.PreDeployment.sql</PostUpgradeAddToSCC>
+    <PreviousProjectVersion>4.0</PreviousProjectVersion>
+    <UpgradedFromDBP>True</UpgradedFromDBP>
+    <Name>dbpProjectName</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.0</ProjectVersion>
+    <ProjectGuid>{67cbc824-a49e-4e9b-a947-360f3dfe65c3}</ProjectGuid>
+    <DSP>Microsoft.Data.Schema.Sql.Sql100DatabaseSchemaProvider</DSP>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <ShowWizard>False</ShowWizard>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <IncludeSchemaNameInFileName>False</IncludeSchemaNameInFileName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchema</DefaultFileStructure>
+    <DeployToDatabaseAddToServerExplorer>True</DeployToDatabaseAddToServerExplorer>
+    <DeployToScript>True</DeployToScript>
+    <CatalogPropertiesFile>Properties\Database.sqlsettings</CatalogPropertiesFile>
+    <LoadSqlClrTypes>True</LoadSqlClrTypes>
+    <SccProjectName>"$/DBScript.root/DBScript_1", PIBAAAAA</SccProjectName>
+    <SccProvider>MSSCCI:Microsoft Visual SourceSafe</SccProvider>
+    <SccAuxPath />
+    <SccLocalPath>..</SccLocalPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>.\sql\release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TargetConnectionString>
+    </TargetConnectionString>
+    <TargetDatabase>
+    </TargetDatabase>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <SuppressWarnings>
+    </SuppressWarnings>
+    <DeploymentConfigFile>Properties\Database.sqldeployment</DeploymentConfigFile>
+    <SqlCommandVariablesFile>Properties\Database.sqlcmdvars</SqlCommandVariablesFile>
+    <DeployToDatabase>False</DeployToDatabase>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>.\sql\debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TargetConnectionString>
+    </TargetConnectionString>
+    <TargetDatabase>
+    </TargetDatabase>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <SuppressWarnings>
+    </SuppressWarnings>
+    <DeploymentConfigFile>Properties\Database.sqldeployment</DeploymentConfigFile>
+    <SqlCommandVariablesFile>Properties\Database.sqlcmdvars</SqlCommandVariablesFile>
+    <DeployToDatabase>False</DeployToDatabase>
+  </PropertyGroup>
+  <!--Import the settings-->
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\TeamData\Microsoft.Data.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Frequently Used Script\ASCADA" />
+    <Folder Include="HA_MetaData" />
+    <Folder Include="HA_MetaData\PHSA Only" />
+    <Folder Include="HA_MetaData\Stored Procedure" />
+    <Folder Include="HA_MetaData\Version one" />
+    <Folder Include="HA_MetaData\Version Two" />
+    <Folder Include="Administration" />
+    <Folder Include="Administration\Adhoc Support" />
+    <Folder Include="Administration\AWE" />
+    <Folder Include="Administration\Backup_Restore" />
+    <Folder Include="Administration\Collation" />
+    <Folder Include="Administration\DatabaseMail" />
+    <Folder Include="Administration\DB_OPTION_SETTING" />
+    <Folder Include="Administration\DB_SPACE" />
+    <Folder Include="Administration\DMV" />
+    <Folder Include="Administration\Function" />
+    <Folder Include="Administration\Installing SQL Server" />
+    <Folder Include="Administration\Performance_Trace" />
+    <Folder Include="Administration\ProxyAccount" />
+    <Folder Include="Administration\ProxyAccount\NewFolder" />
+    <Folder Include="Administration\QueryBlocking" />
+    <Folder Include="Administration\Index" />
+    <Folder Include="Administration\Security" />
+    <Folder Include="Administration\SystemDatabaseMaintenance" />
+    <Folder Include="HA_MetaData\Report Development" />
+    <Folder Include="CMDB_Development" />
+    <Folder Include="Projects\CAIS New Cluster" />
+    <Folder Include="Administration\Index\Index In-Depth" />
+    <Folder Include="Projects\CWDSS05_CaseSensitive" />
+    <Folder Include="Projects\CWDSS05_CaseSensitive\VIEW_ON_TESTSERVER" />
+    <Folder Include="Projects\DataFileTransferBetweenPHSA_PNG" />
+    <Folder Include="Projects\DataFileTransferBetweenPHSA_PNG\CWDSS05_CaseSensitive" />
+    <Folder Include="Projects\DataFileTransferBetweenPHSA_PNG\CWDSS05_CaseSensitive\VIEW_ON_TESTSERVER" />
+    <Folder Include="Projects\ZVCAISDB01 Migration" />
+    <Folder Include="Projects\Document" />
+    <Folder Include="Projects\Document\XtendDatabaseCopy" />
+    <Folder Include="Projects\Document\XtendDatabaseCopy\SQL2005Version" />
+    <Folder Include="Projects\Document\XtendDatabaseCopy\Version 1" />
+    <Folder Include="Projects\Document\XtendDatabaseCopy\Version 2" />
+    <Folder Include="Projects\Document\XtendDatabaseCopy\Version 3" />
+    <Folder Include="Projects\FHA" />
+    <Folder Include="Projects\GetFreeDiskSpace" />
+    <Folder Include="Projects\HA_MetaData_Collection" />
+    <Folder Include="Projects\HA_MetaData_Collection\Stored Procedure" />
+    <Folder Include="Projects\HISYSDB" />
+    <Folder Include="Projects\HISYSDB\Dev" />
+    <Folder Include="Projects\HSSBC Infrastructure" />
+    <Folder Include="Projects\MCI" />
+    <Folder Include="Projects\MCI\Required Some Scripts" />
+    <Folder Include="Projects\MetaDatabase" />
+    <Folder Include="Projects\ODR" />
+    <Folder Include="Projects\Oracle" />
+    <Folder Include="Projects\PeopleSoft" />
+    <Folder Include="Projects\PeopleSoft\SASS" />
+    <Folder Include="Projects\PSLS" />
+    <Folder Include="Projects\Queries" />
+    <Folder Include="Projects\Roop Request" />
+    <Folder Include="Projects\RVHEmpath" />
+    <Folder Include="Projects\Scripts" />
+    <Folder Include="Projects\Scripts\Post-Deployment" />
+    <Folder Include="Projects\Scripts\Pre-Deployment" />
+    <Folder Include="Projects\Server11B Upgrade" />
+    <Folder Include="Projects\SharedScript" />
+    <Folder Include="Projects\SharedScript\DB Configurable Maint V1" />
+    <Folder Include="Projects\SharedScript\DB Configurable Maint V2" />
+    <Folder Include="Projects\SharedScript\FullBackupOnceADay" />
+    <Folder Include="Projects\SPR" />
+    <Folder Include="Projects\SPR\ScrambleData" />
+    <Folder Include="Projects\SRVEHDB01_Transfer" />
+    <Folder Include="Projects\SVMCAISDB03_refresh" />
+    <Folder Include="Projects\TempScript" />
+    <Folder Include="Projects\Tips" />
+    <Folder Include="Projects\VSQ2K5_ISQ2K5" />
+    <Folder Include="Projects\WIC" />
+    <Folder Include="Projects\WinRecs" />
+    <Folder Include="Projects\Wolf" />
+    <Folder Include="Projects\Wolf\Wolf" />
+    <Folder Include="Technology" />
+    <Folder Include="Technology\Index In-Depth" />
+    <Folder Include="Technology\Resource Governor" />
+    <Folder Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X" />
+    <Folder Include="HSSBC DB Maintenance Script\Version 4.X.X.X For SQL 2005 and Up" />
+    <Folder Include="Frequently Used Script\Logon Trigger" />
+    <Folder Include="DeskTop inventory" />
+    <Folder Include="PS And SQL Installation" />
+    <Folder Include="Frequently Used Script\Alert" />
+    <Folder Include="Frequently Used Script\LiteSpeed" />
+    <Folder Include="Frequently Used Script\Change Collation" />
+    <Folder Include="Frequently Used Script\Audit" />
+    <Folder Include="Projects\WHITE_Replicaton" />
+    <Folder Include="Projects\WHITE_Replicaton\Publication_create" />
+    <Folder Include="New Feature Exploration" />
+    <Folder Include="Frequently Used Script\Restore Log" />
+    <Folder Include="Frequently Used Script\Security" />
+    <Folder Include="Frequently Used Script\Encryption" />
+  </ItemGroup>
+  <ItemGroup>
+    <PropertiesFile Include="Properties\Database.sqlsettings">
+    </PropertiesFile>
+    <PropertiesFile Include="Properties\Database.sqldeployment">
+    </PropertiesFile>
+    <PropertiesFile Include="Properties\Database.sqlcmdvars">
+    </PropertiesFile>
+    <Build Include="Properties\Database.sqlpermissions">
+      <ModelBuilderType>Permissions</ModelBuilderType>
+    </Build>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Schema Objects" />
+    <Folder Include="Schema Objects\Schemas" />
+    <Folder Include="Schema Objects\Schemas\dbo" />
+    <Folder Include="Schema Objects\Schemas\dbo\Programmability" />
+    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Defaults" />
+    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Functions" />
+    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Rules" />
+    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures" />
+    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Types" />
+    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Types\User Defined Data Types" />
+    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Types\User Defined Types CLR" />
+    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Types\User Defined Table Types" />
+    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Types\XML Schema Collections" />
+    <Folder Include="Schema Objects\Schemas\dbo\Service Broker" />
+    <Folder Include="Schema Objects\Schemas\dbo\Service Broker\Queues" />
+    <Folder Include="Schema Objects\Schemas\dbo\Synonyms" />
+    <Folder Include="Schema Objects\Schemas\dbo\Tables" />
+    <Folder Include="Schema Objects\Schemas\dbo\Tables\Constraints" />
+    <Folder Include="Schema Objects\Schemas\dbo\Tables\Indexes" />
+    <Folder Include="Schema Objects\Schemas\dbo\Tables\Keys" />
+    <Folder Include="Schema Objects\Schemas\dbo\Tables\Triggers" />
+    <Folder Include="Schema Objects\Schemas\dbo\Tables\Statistics" />
+    <Folder Include="Schema Objects\Schemas\dbo\Views" />
+    <Folder Include="Schema Objects\Schemas\dbo\Views\Indexes" />
+    <Folder Include="Schema Objects\Schemas\dbo\Views\Triggers" />
+    <Folder Include="Schema Objects\Schemas\dbo\Views\Statistics" />
+    <Folder Include="Schema Objects\Database Level Objects" />
+    <Folder Include="Schema Objects\Database Level Objects\Assemblies" />
+    <Folder Include="Schema Objects\Database Level Objects\Database Triggers" />
+    <Folder Include="Schema Objects\Database Level Objects\Security" />
+    <Folder Include="Schema Objects\Database Level Objects\Security\Schemas" />
+    <Folder Include="Schema Objects\Database Level Objects\Security\Users" />
+    <Folder Include="Schema Objects\Database Level Objects\Security\Certificates" />
+    <Folder Include="Schema Objects\Database Level Objects\Security\Asymmetric Keys" />
+    <Folder Include="Schema Objects\Database Level Objects\Security\Master Keys" />
+    <Folder Include="Schema Objects\Database Level Objects\Security\Signatures" />
+    <Folder Include="Schema Objects\Database Level Objects\Security\Symmetric Keys" />
+    <Folder Include="Schema Objects\Database Level Objects\Security\Database Encryption Keys" />
+    <Folder Include="Schema Objects\Database Level Objects\Security\Database Audit Specification" />
+    <Folder Include="Schema Objects\Database Level Objects\Security\Roles" />
+    <Folder Include="Schema Objects\Database Level Objects\Security\Roles\Application Roles" />
+    <Folder Include="Schema Objects\Database Level Objects\Security\Roles\Database Roles" />
+    <Folder Include="Schema Objects\Database Level Objects\Service Broker" />
+    <Folder Include="Schema Objects\Database Level Objects\Service Broker\Broker Priorities" />
+    <Folder Include="Schema Objects\Database Level Objects\Service Broker\Contracts" />
+    <Folder Include="Schema Objects\Database Level Objects\Service Broker\Event Notifications" />
+    <Folder Include="Schema Objects\Database Level Objects\Service Broker\Message Types" />
+    <Folder Include="Schema Objects\Database Level Objects\Service Broker\Remote Service Binding" />
+    <Folder Include="Schema Objects\Database Level Objects\Service Broker\Routes" />
+    <Folder Include="Schema Objects\Database Level Objects\Service Broker\Services" />
+    <Folder Include="Schema Objects\Database Level Objects\Storage" />
+    <Folder Include="Schema Objects\Database Level Objects\Storage\Full Text Stoplists" />
+    <Folder Include="Schema Objects\Database Level Objects\Storage\Filegroups" />
+    <Folder Include="Schema Objects\Database Level Objects\Storage\Files" />
+    <Folder Include="Schema Objects\Database Level Objects\Storage\Full Text Catalogs" />
+    <Folder Include="Schema Objects\Database Level Objects\Storage\Partition Functions" />
+    <Folder Include="Schema Objects\Database Level Objects\Storage\Partition Schemes" />
+    <Folder Include="Projects" />
+    <Folder Include="Projects\Access" />
+    <Folder Include="Projects\Ad hoc Support" />
+    <Folder Include="Projects\ADM_UsedFrequently" />
+    <Folder Include="Projects\Audit Log" />
+    <Folder Include="Projects\Backup" />
+    <Folder Include="Projects\Backup\FullBackupOnceADay" />
+    <Folder Include="Projects\Backup\FullBakcupSeveralTimesAday" />
+    <Folder Include="Projects\BackupAndLogShipping" />
+    <Folder Include="Projects\BackupAndLogShipping\Version1" />
+    <Folder Include="Projects\BackupAndLogShipping\Version1\ProductionServer" />
+    <Folder Include="Projects\BackupAndLogShipping\Version1\StandbyServer" />
+    <Folder Include="Projects\BackupAndLogShipping\Version2" />
+    <Folder Include="Projects\BackupAndLogShipping\Version2\PrimaryServer" />
+    <Folder Include="Projects\BackupAndLogShipping\Version2\StandbyServer" />
+    <Folder Include="Projects\BCCHFIN Migration Orace To SQL Server" />
+    <Folder Include="Projects\BPP" />
+    <Folder Include="Projects\CAIS" />
+    <Folder Include="Projects\CAIS\BuildStagingServer" />
+    <Folder Include="Projects\CAIS\CHT_TRAK Upgrade" />
+    <Folder Include="Projects\CAIS\Email Alert Job" />
+    <Folder Include="Projects\CC_Replication From FHA To PHSA" />
+    <Folder Include="Projects\CC_Replication From FHA To PHSA\Production" />
+    <Folder Include="Projects\CC_Replication From FHA To PHSA\TEST" />
+    <Folder Include="Projects\Comet" />
+    <Folder Include="Projects\CWAP11_replication" />
+    <Folder Include="Projects\CWDSS05" />
+    <Folder Include="Projects\CWDSS05\Cube Management" />
+    <Folder Include="Projects\CWDSS05\Optimization" />
+    <Folder Include="Projects\CWDSS05\Optimization\PS_Det" />
+    <Folder Include="Projects\CWDSS05\Optimization\PS_Detail" />
+    <Folder Include="Frequently Used Script" />
+    <Folder Include="Frequently Used Script\Create Job" />
+    <Folder Include="HSSBC DB Maintenance Script" />
+    <Folder Include="HSSBC DB Maintenance Script\For SQL 2000" />
+    <Folder Include="HSSBC DB Maintenance Script\For SQL 2000\VCAISDB01 Full Backup Script" />
+    <Folder Include="HSSBC DB Maintenance Script\Version 3.X.X.XFor SQL 2005 and Up" />
+    <Folder Include="HSSBC DB Maintenance Script\Separate Scripts V3.X.X.X" />
+    <Folder Include="Properties" />
+  </ItemGroup>
+  <ItemGroup>
+    <NotInBuild Include="Connections.txt" />
+    <NotInBuild Include="Projects\Access\ContactList.sql" />
+    <NotInBuild Include="Projects\Ad hoc Support\DeleteAllRecordInADB.sql" />
+    <NotInBuild Include="Projects\Ad hoc Support\DropCAIS_WarehouseUsers.sql" />
+    <NotInBuild Include="Projects\Ad hoc Support\Invest_BuyHomeOrMutualFund.sql" />
+    <NotInBuild Include="Projects\Ad hoc Support\LoaITGAuditData.sql" />
+    <NotInBuild Include="Projects\Ad hoc Support\NetBackup_CurrentStatus.sql" />
+    <NotInBuild Include="Projects\Ad hoc Support\PS_JobScript.sql" />
+    <NotInBuild Include="Projects\Ad hoc Support\Support.sql" />
+    <NotInBuild Include="Projects\Backup\FullBackupOnceADay\create_backupparametertable.sql" />
+    <NotInBuild Include="Projects\Backup\FullBackupOnceADay\hsp_FullBackupAllDB.sql" />
+    <NotInBuild Include="Projects\Backup\FullBackupOnceADay\hsp_FullBackupAllDBWithoutDateSuffix.sql" />
+    <NotInBuild Include="Projects\Backup\FullBackupOnceADay\hsp_FullBackupAllLog.sql" />
+    <NotInBuild Include="Projects\Backup\FullBackupOnceADay\hsp_FullBackupSpecificDB.sql" />
+    <NotInBuild Include="Projects\Backup\FullBackupOnceADay\hsp_LogSwitchAndLogBackup.sql" />
+    <NotInBuild Include="Projects\Backup\FullBackupOnceADay\hsp_LogSwitchAndLogBakcup_Only.sql" />
+    <NotInBuild Include="Projects\Backup\FullBackupOnceADay\hsp_SendMailTest.sql" />
+    <NotInBuild Include="Projects\Backup\FullBackupOnceADay\job_backkup.sql" />
+    <NotInBuild Include="Projects\Backup\FullBackupOnceADay\job_script.sql" />
+    <NotInBuild Include="Projects\Backup\FullBackupOnceADay\Sp_SendEmail.sql" />
+    <NotInBuild Include="Projects\Backup\FullBakcupSeveralTimesAday\CreateMataTables_V2.sql" />
+    <NotInBuild Include="Projects\Backup\FullBakcupSeveralTimesAday\hsp_BackupControl_V2.sql" />
+    <NotInBuild Include="Projects\Backup\FullBakcupSeveralTimesAday\hsp_DeleteBackupOnedayOlder_V2.sql" />
+    <NotInBuild Include="Projects\Backup\FullBakcupSeveralTimesAday\hsp_FullBackupADB_V2.sql" />
+    <NotInBuild Include="Projects\Backup\FullBakcupSeveralTimesAday\hsp_FullBackupAllDBs_V2.sql" />
+    <NotInBuild Include="Projects\Backup\FullBakcupSeveralTimesAday\hsp_FullbackupSpecifiedDBs_V2.sql" />
+    <NotInBuild Include="Projects\Backup\FullBakcupSeveralTimesAday\hsp_LogBackupSpecifiedDBs_V2.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version1\CreateMetaTable.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version1\ProductionServer\DeleteRecordInBackupLogTable.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version1\ProductionServer\hfn_GetFileName.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version1\ProductionServer\hfn_GetServerName.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version1\ProductionServer\hsp_BackupControl.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version1\ProductionServer\hsp_CopyToDest.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version1\ProductionServer\hsp_DeleteFullBackupAndLogBefore.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version1\ProductionServer\hsp_FullBackupAllDB.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version1\ProductionServer\hsp_InsertRestoreLog.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version1\ProductionServer\hsp_LogBackup.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version1\StandbyServer\hsp_DeleteRestoredFile.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version1\StandbyServer\hsp_RestoreDB.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version1\StandbyServer\hsp_RestoreStdbyDBToRecovery.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version2\CreateMetaTables_V2.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version2\PrimaryServer\00_Script_CreateMetaTables.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version2\PrimaryServer\01_sp_SendEmail.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version2\PrimaryServer\02_hsp_DeleteBackupOnedayOlder_V2.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version2\PrimaryServer\03_hsp_FullBackupADB_V2.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version2\PrimaryServer\031_hsp_DiffBackupADB_V2.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version2\PrimaryServer\04_hsp_FullBackupAllDbs_V2.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version2\PrimaryServer\05_hsp_FullBackupSpecifiedDBs_V2.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version2\PrimaryServer\051_hsp_DiffBackupSpecifiedDBs.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version2\PrimaryServer\06_hsp_LogBackupSpecifiedDBs_V2.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version2\PrimaryServer\07_hsp_BackupControl_V2.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version2\PrimaryServer\08_hfn_GetFileName_V2.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version2\PrimaryServer\09_hfn_GetServerName_V2.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version2\PrimaryServer\10_hsp_InsertRestoreLog_V2.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version2\PrimaryServer\11_hsp_CopyToDest_V2.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version2\PrimaryServer\11_hsp_ps_CopyToDest_V2.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version2\PrimaryServer\12_hsp_RestoreStandByDBs_V2.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version2\PrimaryServer\hsp_LogshippingStart_V2.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version2\PrimaryServer\Job_backup.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version2\StandbyServer\01_Sp_SendEmial.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version2\StandbyServer\02_hsp_RestoreDB_V2.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version2\StandbyServer\03_hsp_DeleteRestoredFile_V2.sql" />
+    <NotInBuild Include="Projects\BackupAndLogShipping\Version2\StandbyServer\Script_RestoreStdbyDBToRecovery_V2.sql" />
+    <NotInBuild Include="Projects\BCCHFIN Migration Orace To SQL Server\CreateAllDatabases.sql" />
+    <NotInBuild Include="Projects\BPP\IndexesForFactDetails_Full.sql" />
+    <NotInBuild Include="Projects\BPP\IndexForFactLedger.sql" />
+    <NotInBuild Include="Projects\BPP\RegularWorkForBPP.txt.sql" />
+    <NotInBuild Include="Projects\BPP\STMT4Tuning.sql" />
+    <NotInBuild Include="Projects\BPP\Tuning_Script.sql" />
+    <NotInBuild Include="Projects\CAIS\'prostate_cancer_study_q03624.sql" />
+    <NotInBuild Include="Projects\CAIS\CAIS_PRODUCTION_REINDEX.sql" />
+    <NotInBuild Include="Projects\CAIS\CAIS_Production_Trace.sql" />
+    <NotInBuild Include="Projects\CAIS\CHT_TRAK Upgrade\login_script_from_server50_old.sql" />
+    <NotInBuild Include="Projects\CAIS\CHT_TRAK Upgrade\Moving_upgraded_CHT_TRAK.sql" />
+    <NotInBuild Include="Projects\CAIS\Email_Alert.sql" />
+    <NotInBuild Include="Projects\CAIS\REINDEX_CAIS_PRODUCTION_STEPS.sql" />
+    <NotInBuild Include="Projects\CAIS\RestoreCAPOnServer11B.sql" />
+    <NotInBuild Include="Projects\CAIS\setdbtosingleuser.sql" />
+    <NotInBuild Include="Projects\CAIS\SP_RestoreLogFromServer94.sql" />
+    <NotInBuild Include="Projects\CC_Replication From FHA To PHSA\Production\Script on Distributor.sql" />
+    <NotInBuild Include="Projects\CC_Replication From FHA To PHSA\Production\Script on Publisher.sql" />
+    <NotInBuild Include="Projects\CC_Replication From FHA To PHSA\TEST\Replication Script.sql" />
+    <NotInBuild Include="Projects\Comet\Login_From7_To_2000.sql" />
+    <NotInBuild Include="Projects\Comet\Login_migration.sql" />
+    <NotInBuild Include="Projects\CWAP11_replication\CWAP11_replication.sql" />
+    <NotInBuild Include="Projects\CWDSS05\Cube Management\BackupAndRestoreCube.sql" />
+    <NotInBuild Include="Projects\CWDSS05\Optimization\PS_Det\hsp_DeletetblFullDetailsWithIDRange.sql" />
+    <NotInBuild Include="Projects\CWDSS05\Optimization\PS_Det\PS_Det_tblFullDetails_IndexCreate.sql" />
+    <NotInBuild Include="Projects\CWDSS05\Optimization\PS_Det\RefreshPS_DetDim.sql" />
+    <NotInBuild Include="Projects\CWDSS05\Optimization\PS_Detail\hsp_SelectPS_JRNL_LNFromPS.sql" />
+    <NotInBuild Include="Projects\CWDSS05\Optimization\PS_Detail\PS_Detail_PS_JRNL_LN_IndexDropAndCreate.sql" />
+    <NotInBuild Include="Projects\CWDSS05\Optimization\PS_Detail\PS_Detail_PS_JRNL_LN_Insert.sql" />
+    <NotInBuild Include="Frequently Used Script\Adhoc_backup.sql" />
+    <NotInBuild Include="Frequently Used Script\Adhoc_Log_Backup.sql" />
+    <NotInBuild Include="Frequently Used Script\Creat_User_And_Grant_Permission.sql" />
+    <NotInBuild Include="Frequently Used Script\Create Job\Connection_Tracker_Job.sql" />
+    <NotInBuild Include="Frequently Used Script\Job_ConnectionTracker.sql" />
+    <NotInBuild Include="Frequently Used Script\Migrate_instance.sql" />
+    <NotInBuild Include="Frequently Used Script\QUery_Backup_status.sql" />
+    <NotInBuild Include="Frequently Used Script\Query_ConnectionTracker.sql" />
+    <NotInBuild Include="Frequently Used Script\Query_Datafile_realData_size_on_instance.sql" />
+    <NotInBuild Include="Frequently Used Script\Query_Disk_usage.sql" />
+    <NotInBuild Include="Frequently Used Script\Query_instance_port_number.sql" />
+    <NotInBuild Include="Frequently Used Script\Query_open_transaction.sql" />
+    <NotInBuild Include="Frequently Used Script\Query_SP_WHo2_In_TempTable.sql" />
+    <NotInBuild Include="Frequently Used Script\Query_User_Permissions.sql" />
+    <NotInBuild Include="Frequently Used Script\SP_Restore_logfile_from_a_folder_with_one_log_backup_one_file.sql" />
+    <NotInBuild Include="Frequently Used Script\Restore_System_DB.sql" />
+    <NotInBuild Include="Frequently Used Script\Setup_Linked_Server.sql" />
+    <NotInBuild Include="Frequently Used Script\SSPI_Context_Issue.sql" />
+    <NotInBuild Include="HSSBC DB Maintenance Script\For SQL 2000\db_maint_script_package.sql" />
+    <NotInBuild Include="HSSBC DB Maintenance Script\For SQL 2000\VCAISDB01 Full Backup Script\Full_backup.sql" />
+    <NotInBuild Include="HSSBC DB Maintenance Script\Version 3.X.X.XFor SQL 2005 and Up\01_setup_database_mail_sql_agent_alert.sql" />
+    <NotInBuild Include="HSSBC DB Maintenance Script\Version 3.X.X.XFor SQL 2005 and Up\02_db_maint_script_package.sql" />
+    <NotInBuild Include="HSSBC DB Maintenance Script\New_hsp_reindex.sql" />
+    <NotInBuild Include="HSSBC DB Maintenance Script\Rewritten_RE_Index.sql" />
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V3.X.X.X\010_initial_script.sql" />
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V3.X.X.X\020_hsp_script_version_control.sql" />
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V3.X.X.X\030_hsp_get_candidate_database_list.sql" />
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V3.X.X.X\040_hsp_test_create_subfolder.sql" />
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V3.X.X.X\050_hsp_delete_obsolete_backup.sql" />
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V3.X.X.X\051_hsp_delete_latest_full_backup_with_dbname.sql" />
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V3.X.X.X\060_hsp_full_backup_database.sql" />
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V3.X.X.X\070_hsp_mirror_db_failover_time.sql" />
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V3.X.X.X\080_hsp_mirror_db_failover_fullbackup.sql" />
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V3.X.X.X\090_hsp_log_backup_database.sql" />
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V3.X.X.X\091_hsp_log_backup_database_with_dbname.sql" />
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V3.X.X.X\100_hsp_check_integrity.sql" />
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V3.X.X.X\110_hsp_reindex.sql" />
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V3.X.X.X\120_hsp_update_statistics.sql" />
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V3.X.X.X\130_hsp_check_disk_space.sql" />
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V3.X.X.X\140_hsp_switch_job_output_file.sql" />
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V3.X.X.X\150_hsp_delete_obsolete_job_output_file.sql" />
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V3.X.X.X\160_hsp_recycle_history_and_error_log.sql" />
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V3.X.X.X\900_hsp_maint_control.sql" />
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V3.X.X.X\990_last_script.sql" />
+    <NotInBuild Include="HSSBC DB Maintenance Script\test_template.sql" />
+    <NotInBuild Include="Projects\BPP\PerformanceTuning.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Add_A_Linked_Server.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Create Job\Onetime_Adhoc_Backup_Job.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Version 3.X.X.XFor SQL 2005 and Up\99_drop_all_maintenance_package.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\ASCADA\general_script.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HA_MetaData\PHSA Only\check_database_consistance_bwtweet_metadata_and_actual_instance.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HA_MetaData\PHSA Only\query_database_info.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HA_MetaData\PHSA Only\query_database_without_contact.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HA_MetaData\Stored Procedure\query_newly_added_database.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HA_MetaData\Version one\collect_database_info.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HA_MetaData\Version one\collect_instance_info.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HA_MetaData\Version one\collect_sa_info.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HA_MetaData\Version one\query_frequently_used.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HA_MetaData\Version one\query_Idera.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HA_MetaData\Version one\Query_Reports.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HA_MetaData\Version one\setup_linkedservers.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HA_MetaData\Version Two\Database Update Manually under PHSA Account.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HA_MetaData\Version Two\Databse Update.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HA_MetaData\Version Two\Instance List Updata Job.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HA_MetaData\Version Two\query_frequently_used.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Adhoc Support\temp.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\AWE\AWE.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Backup_Restore\FN_SpliteAString.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Backup_Restore\FN_SpliteAString_otherVersion.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Backup_Restore\SP_Adhoc_Backup.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Backup_Restore\SP_GeneratingRestoreScript.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Backup_Restore\SP_RestoreBackupFromAFolder.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Backup_Restore\SP_RestoreBasedonMSDB.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Backup_Restore\SP_REstoreBasedonMSDB_WithNewLocation.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Backup_Restore\UTL_Adhoc_FullBackup_AllDBs.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Backup_Restore\UTL_Backup_Restore.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Backup_Restore\UTL_Backup_Restore_AndHisoryLog.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Backup_Restore\UTL_Check_Backup_Restore.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Backup_Restore\UTL_Query_Status_Of_ Backup_Restore.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Backup_Restore\UTL_ReindexADBWithCertainFrag.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Backup_Restore\UTL_Restore_SQL2000_SystemDB.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Backup_Restore\UTL_Restore_sytem_databases.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Backup_Restore\UTL_RestoreLatestUniversalBackup.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Collation\UTL_ChangeInstanceCollation.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\DatabaseMail\UTL_SetupDatabaseMail.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\DB_OPTION_SETTING\set_a_db_option.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\DB_OPTION_SETTING\set_file_growth_for_instance.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\DB_OPTION_SETTING\UTL_DB_SZIE_AND_GROWTH.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\DB_SPACE\AllDBsAndSizeOnaServer.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\DB_SPACE\disk_and_usage.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\DB_SPACE\FileUsageInADB.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\DB_SPACE\SP_DBSize.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\DB_SPACE\sp_tablesize.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\DB_SPACE\UTL_CalculateFreeDBSpace.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\DB_SPACE\UTL_CHeckLogSpaceUsage.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\DMV\UTL_SystemMonitor.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Function\FN_ReplacePath.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Performance_Trace\SP_Perf_SQ2K_General.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Performance_Trace\SP_Perf_SQ2K5_DurationAndDB.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\ProxyAccount\setup_proxy_account.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\QueryBlocking\BlockingCheck_From_MS.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\QueryBlocking\SP_CheckBlockBy.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\QueryBlocking\UTL_AllLocks.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\QueryBlocking\UTL_DBCC_In_Table.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\QueryBlocking\UTL_Sp_who2_in_table.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Index\SP_FragmentAndReorganize.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Index\SP_ReindexADB.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Index\UTL_FindIndexUsage.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Index\UTL_SQL2K5_RebuildorReindexDB.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Index\UTL_SQL2K5_ReindexAllDB.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Security\Changet_all_db_owner_to_sa.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Security\find_orphan_db_user_on_an_instance.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Security\Script_Permission_grant.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Security\SP_GrantAllStoredProcedure_2000.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Security\SP_GrantAllStoredProcedure_2005.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Security\SP_GrantAUserExecutingAllSprocs.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Security\UTL_AccountCreateAndPermissionGrant.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Security\UTL_AddLinkedServer.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Security\UTL_ChangeOwnerShip.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Security\UTL_FindDBOwners.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Security\UTL_FindOrphanDBUser.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Security\UTL_Grant_Permission_On_All_DB.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Security\UTL_GrantUserViewPermission.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Security\UTL_OrphanUser_Drop_Mapping.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Security\UTL_Permission_ReverseEngineering.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Security\UTL_TransferLoginAndPwd_2K5To2K5.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Security\UTL_TransferLoginANDPwd_BTW7_2000.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Security\UTL_TransferLoginANDPwd_From2KTO2K5.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Security\UTL_UserPermissions.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Security\UTL_UserPermissions_2K5.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Security\UTL_UserWithFixedServerRoles.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\SystemDatabaseMaintenance\MoveMSDB_MODE_SQL2005.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\SystemDatabaseMaintenance\MoverTempDB.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\SystemDatabaseMaintenance\RebuildSystemDatabase_2012.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\SystemDatabaseMaintenance\Recreate_msdb.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Adhoc_backup.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\commonSQL.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\CTEForparsingCSVString.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\FrequentlyUsedStatement.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\psp_create_users.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\SP_DeleteUpdateWithRange.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\SP_EmailActualDataSize.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\SP_FindObjectOnServer.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\SP_GetAllSQLServerVersion.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\SP_KillConnectionToASpecificDb.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\SP_ListOSContent.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\SP_SearchAllTableEveryColumn.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\SP_SetAllDBtoSingleUser.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\SP_SETSimpleAndAutoShrinkForAllUserDB.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\SP_ShowCodeLineBySPID.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\SP_ShowCodeLineInAllSessions.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\SP_ShowCodeLineInAllSessions_2000Version.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\SP_WHO_TABLE.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\SP_WHO3.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\UTL_AdminScripts.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\UTL_CheckSQLServerUpTime.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\UTL_ConnectionTracker.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\UTL_CreateOracleLinkedServer.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\UTL_CreateProxyAccount.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\UTL_CurrentServerDBAnalyze.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\UTL_FindInstancePortNumber.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\UTL_GetAPortionFromAStringsql.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\UTL_Kill_Connection.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\UTL_MortgageCalculation.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\UTL_ObjectReferredInSPorView.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\UTL_ReadErrorLog.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\UTL_TakeDBOffLine.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Adhoc_backup_all_dbs.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HA_MetaData\Version Two\Database_Size_Manually_Refresh.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HA_MetaData\Report Development\IBMTicket_Query.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HA_MetaData\Version Two\Adding Login.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HA_MetaData\Version Two\On_All_Servers_Change_Email_Address.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HA_MetaData\Version Two\On_All_Servers_Run_A_Script.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Generate_restore_log_script.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="CMDB_Development\CMDB_V2_Changes.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HA_MetaData\Version Two\Update_instance_ip.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HA_MetaData\Version Two\KDC_Transition_Check_script.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\CAIS New Cluster\Steps for Change Virtual Name of Clustered Instance.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\CAIS New Cluster\One_Time_DB_Backup.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\CAIS New Cluster\Database Restore.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\CAIS New Cluster\Log_Restore.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Index\Index In-Depth\index_usage_stats.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Administration\Index\Index In-Depth\Index_Operational_Stats.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\CWDSS05_CaseSensitive\VIEW_ON_TESTSERVER\StoredProcedureFromPS_Detail.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\CWDSS05_CaseSensitive\VIEW_ON_TESTSERVER\ViewsFromPS_Detail.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\CWDSS05_CaseSensitive\VIEW_ON_TESTSERVER\ViewsFromPSDM.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\DataFileTransferBetweenPHSA_PNG\CWDSS05_CaseSensitive\VIEW_ON_TESTSERVER\StoredProcedureFromPS_Detail.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\DataFileTransferBetweenPHSA_PNG\CWDSS05_CaseSensitive\VIEW_ON_TESTSERVER\ViewsFromPS_Detail.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\DataFileTransferBetweenPHSA_PNG\CWDSS05_CaseSensitive\VIEW_ON_TESTSERVER\ViewsFromPSDM.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\DataFileTransferBetweenPHSA_PNG\CWDSS05_CaseSensitive\VIEW_ON_TESTSERVER\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\DataFileTransferBetweenPHSA_PNG\Security_FTP.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\DataFileTransferBetweenPHSA_PNG\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\ZVCAISDB01 Migration\migrating_system_db.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\ZVCAISDB01 Migration\Migrating_user_db.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\ZVCAISDB01 Migration\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Document\XtendDatabaseCopy\SQL2005Version\Script_OnServerSide.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Document\XtendDatabaseCopy\SQL2005Version\Script_OnWorkstationSide.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Document\XtendDatabaseCopy\SQL2005Version\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Document\XtendDatabaseCopy\Version 1\hsp_JobOnDBServer.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Document\XtendDatabaseCopy\Version 1\hsp_JobOnIFServer.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Document\XtendDatabaseCopy\Version 1\hsp_JobOnWorkStation.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Document\XtendDatabaseCopy\Version 1\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Document\XtendDatabaseCopy\Version 2\hsp_JobOnIFServer_V2.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Document\XtendDatabaseCopy\Version 2\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Document\XtendDatabaseCopy\Version 2\XtendClientPush.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Document\XtendDatabaseCopy\Version 3\01 - CreateNonPatientDBOnSharedFolder.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Document\XtendDatabaseCopy\Version 3\02 - RestoreNonpatientDBToClients.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Document\XtendDatabaseCopy\Version 3\10_RestoreStatusQuery.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Document\XtendDatabaseCopy\Version 3\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Document\XtendDatabaseCopy\ChekTheLatestRestoration.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Document\XtendDatabaseCopy\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Document\EMAIL_SETTING.txt.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Document\How to enable AWE on 32bit SQL Server.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Document\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\FHA\LongRunSP_Inst4.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\FHA\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\GetFreeDiskSpace\hsp_GetDiskFreeSpace.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\GetFreeDiskSpace\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\HA_MetaData_Collection\Stored Procedure\query_db_contact.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\HA_MetaData_Collection\Stored Procedure\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\HISYSDB\Dev\create_table_script.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\HISYSDB\Dev\loading_slip_definition.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\HISYSDB\Dev\sp_script.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\HISYSDB\Dev\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\HISYSDB\Dev\workspace.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\HISYSDB\sp_PRocessDataExtract.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\HISYSDB\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\HSSBC Infrastructure\sp_get_available_server_name.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\HSSBC Infrastructure\sp_insert_server_name.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\HSSBC Infrastructure\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\MCI\Required Some Scripts\Scr_AppRetrieveUpdateQueue.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\MCI\Required Some Scripts\Scr_AppUpdateUpdateQueueStatus.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\MCI\Required Some Scripts\Scr_CreateActionAudit.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\MCI\Required Some Scripts\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\MCI\CommonScript.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\MCI\hsp_ArchiveMCIMsgBeforeToday.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\MCI\hsp_DeleteDataCloset_Audit.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\MCI\hsp_DeleteDataCloset_Message.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\MCI\hsp_KeepLastRecordInArchiveDB.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\MCI\hsp_ResetMCI_MessageArchive.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\MCI\hsp_RestoreMCIOnStaging.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\MCI\MCI_CleanUp.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\MCI\MCI_CreateForeignKeys.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\MCI\MCI_DropForeignKeys.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\MCI\MCI_TruncateSelectedTables.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\MCI\Rebuild_ReorganizeMCI.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\MCI\Rebuild_table_V1.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\MCI\Rebuild_table_V2.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\MCI\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\MetaDatabase\Common.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\MetaDatabase\FreeDiskSpaceOnServer.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\MetaDatabase\Scrip_backupAudit.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\MetaDatabase\Scrip_CreateLoginAndDBUserTable.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\MetaDatabase\Script_BackupMissingDay.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\MetaDatabase\SetupServerLink.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\MetaDatabase\SP_GetAllDataBase.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\MetaDatabase\SP_GetAllSQLServerVersion.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\MetaDatabase\SP_GetDatabaseSize.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\MetaDatabase\SP_PopulateHelpDB.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\MetaDatabase\SP_PopulateHelpDB_DBSIZE.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\MetaDatabase\SP_PopulateHelpDB_LinkedServer.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\MetaDatabase\SP_SearchLinkedServers.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\MetaDatabase\SP_TestAllLinkedServers.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\MetaDatabase\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\ODR\OptimizeImageTable.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\ODR\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Oracle\Flashack_DataRecovery.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Oracle\GetSessionInfo.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Oracle\OracleScript.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Oracle\SessionAndMemoryUsage.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Oracle\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\PeopleSoft\SASS\query_fragmetation.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\PeopleSoft\SASS\Restore_Script.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\PeopleSoft\SASS\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\PeopleSoft\PH_GetPersonInfoByEmployeeID.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\PeopleSoft\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\PSLS\Job Script.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\PSLS\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Queries\AIS.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Queries\Session_Report.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Queries\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Queries\Xtend.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Queries\Xtend1.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Roop Request\Script1.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Roop Request\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\RVHEmpath\CREATE VIEW RVH_PCF1_V1.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\RVHEmpath\create View RVH_PCF2_V1.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\RVHEmpath\FromBinarytoString.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\RVHEmpath\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Scripts\Post-Deployment\Script.PostDeployment.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Scripts\Post-Deployment\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Scripts\Pre-Deployment\Script.PreDeployment.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Scripts\Pre-Deployment\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Server11B Upgrade\DB Restore Script.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Server11B Upgrade\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\DB Configurable Maint V1\01_default_configuration.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\DB Configurable Maint V1\02_maintenace_control.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\DB Configurable Maint V1\0301_test_create_subfolder.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\DB Configurable Maint V1\0302_delete_obsolete_backup.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\DB Configurable Maint V1\0303_full_backup_database.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\DB Configurable Maint V1\0304_full_backup_mirror_database.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\DB Configurable Maint V1\0305_log_backup_database.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\DB Configurable Maint V1\0399_full_backup_specific_database.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\DB Configurable Maint V1\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\DB Configurable Maint V2\01_setup_database_mail_sql_agent_alert.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\DB Configurable Maint V2\02_configuatation.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\DB Configurable Maint V2\0201_get_candidate_database_list.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\DB Configurable Maint V2\0202_script_version_control.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\DB Configurable Maint V2\0203_migrate_version_1.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\DB Configurable Maint V2\0301_test_create_subfolder.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\DB Configurable Maint V2\0302_delete_obsolete_backup.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\DB Configurable Maint V2\0303_full_backup_database.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\DB Configurable Maint V2\0304_full_backup_mirror_database.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\DB Configurable Maint V2\0305_log_backup_database.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\DB Configurable Maint V2\0306_manual_full_backup_database.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\DB Configurable Maint V2\04_check_integrity.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\DB Configurable Maint V2\05_reindex.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\DB Configurable Maint V2\06_update_statistics.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\DB Configurable Maint V2\07_check_disk_space.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\DB Configurable Maint V2\19_maintenace_control.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\DB Configurable Maint V2\20_db_maint_script_package.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\DB Configurable Maint V2\9901_parse_disk_threshold_string.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\DB Configurable Maint V2\9902_parse_delimited_string.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\DB Configurable Maint V2\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\FullBackupOnceADay\0_ScriptVersionControl.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\FullBackupOnceADay\01_create_backupparametertable.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\FullBackupOnceADay\03_BackupScript_UsingJobNotification.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\FullBackupOnceADay\9995_BackupScript_UsingJobNotification.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\FullBackupOnceADay\9996_create_Databasemail_and_BackupJob.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\FullBackupOnceADay\9997_cycle_loginfo.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\FullBackupOnceADay\9998_StatusQueries.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\FullBackupOnceADay\9999_BackupScript.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\FullBackupOnceADay\SP_Mirroring_Status.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SharedScript\FullBackupOnceADay\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SPR\ScrambleData\HFn_getACharPositionFromAString.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SPR\ScrambleData\Hfn_GetColumnName.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SPR\ScrambleData\HFn_GetScrambledDate.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SPR\ScrambleData\Hfn_GetScrambledString.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SPR\ScrambleData\HSP_CreateRandomMapping.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SPR\ScrambleData\HSP_GeneratingScript.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SPR\ScrambleData\HSP_GeneratingScript_CreateAllFK.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SPR\ScrambleData\HSP_GeneratingScript_DropAllFK.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SPR\ScrambleData\HSP_GeneratingScript_FK.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SPR\ScrambleData\HSP_GeneratingScript_Index.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SPR\ScrambleData\HSP_GeneratingScript_Insert.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SPR\ScrambleData\HSP_GeneratingScript_PK.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SPR\ScrambleData\HSP_GeneratingScript_Trigger.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SPR\ScrambleData\HSP_GetscramblingSeed.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SPR\ScrambleData\Scrip_SPR_Scrambing.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SPR\ScrambleData\Script_Generated.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SPR\ScrambleData\Script_Temp.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SPR\ScrambleData\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SPR\BatchUpload_Tuning.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SPR\CreateDBScript.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SPR\createIndexAndUpdateAColumn.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SPR\Defragmentation.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SPR\Refresh_STG_Script.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SPR\Run_Script_For_SPR_3.0.batl.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SPR\SPR_3_Data_moving.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SPR\transform_spr_pat_eval_answ.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SPR\truncateAllTable.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SPR\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SPR\zvmcog07_RestoreSPRDB.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SRVEHDB01_Transfer\instance_migration.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SRVEHDB01_Transfer\restore_logfiles.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SRVEHDB01_Transfer\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SVMCAISDB03_refresh\appy_available_log_file_onto_cais_new.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SVMCAISDB03_refresh\CAIS Manual Refresh.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SVMCAISDB03_refresh\delete_older_backup_copy_new_one.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SVMCAISDB03_refresh\hsp_apply_log_backup_onto_cais_new.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SVMCAISDB03_refresh\hsp_restore_latest_cais_full_backup.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SVMCAISDB03_refresh\Refresh_By_Local_backup.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\SVMCAISDB03_refresh\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\TempScript\Encryption_exercise.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\TempScript\find_text_column.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\TempScript\ServiceBroker_Exercise.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\TempScript\Storage_Internal_Explore.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\TempScript\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Tips\ProcessingTableAsAQueue.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Tips\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\VSQ2K5_ISQ2K5\Restore Databases.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\VSQ2K5_ISQ2K5\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\WIC\Script_ChangeWIC2Recovery.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\WIC\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\WinRecs\RestoreTestDBsFromProductionBackup.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\WinRecs\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Wolf\Wolf\Script_Reindex.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Wolf\Wolf\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Wolf\Reindex_online.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\Wolf\vssver.scc">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Technology\CTE_Recursive.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Technology\Index In-Depth\Index_Operational_Stats.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Technology\Index In-Depth\index_usage_stats.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Technology\Resource Governor\ResourceGovernor.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Create_ResourceGovernor_For_Adhoc_Query.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HA_MetaData\Version Two\Query_latest_abckup_on_every_instnce.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V3.X.X.X\001_all_parameters.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V3.X.X.X\003_hsp_set_migrate_parameter.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V3.X.X.X\002_create_parameter_action_table.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V3.X.X.X\007_set_migrate_parameters_action.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V3.X.X.X\004_hsp_migrate_action.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V3.X.X.X\005_hsp_schedule_default_action.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V3.X.X.X\023_calculate_next_run_time.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V3.X.X.X\021_hfn_week_number_of_month.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V3.X.X.X\022_last_day_of_month.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\001_all_parameters.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\002_create_parameter_action_logging_version_table.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\003_hsp_set_migrate_parameter.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\004_hsp_migrate_action.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\005_hsp_schedule_default_action.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\010_set_migrate_parameters_action.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\020_hsp_script_version_control.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\006_hfn_week_number_of_month.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\007_hfn_last_day_of_month.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\008_hsp_calculate_next_run_time.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\030_hsp_get_candidate_database_list.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\040_hsp_test_create_subfolder.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\050_hsp_delete_obsolete_backup.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\051_hsp_delete_latest_full_backup_with_dbname.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\060_hsp_full_backup_database.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\070_hsp_mirror_db_failover_time.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\080_hsp_mirror_db_failover_fullbackup.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\090_hsp_log_backup_database.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\091_hsp_log_backup_database_with_dbname.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\100_hsp_check_integrity.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\110_hsp_reindex.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\120_hsp_update_statistics.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\130_hsp_check_disk_space.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\140_hsp_switch_job_output_file.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\150_hsp_delete_obsolete_job_output_file.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\160_hsp_recycle_history_and_error_log.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\990_last_script.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\910_hsp_maint_schedule.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\024_hsp_maint_log.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\025_hfn_get_retention_day.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\026_hfn_get_backup_path.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Version 4.X.X.X For SQL 2005 and Up\01_setup_database_mail_sql_agent_alert.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Version 4.X.X.X For SQL 2005 and Up\02_db_maint_script_package.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Version 4.X.X.X For SQL 2005 and Up\99_drop_all_maintenance_package.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\061_hsp_adhoc_backup_database.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\131_hsp_get_disk_space.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Query_database_total_and_used_space.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Fix_log_unstop_growing.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\170_hsp_shrink_log_file.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Logon Trigger\create_audit_table_and_trigger.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Logon Trigger\query_delete_logon_trigger.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\180_hsp_differential_backup_database.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Query_backup_time_from_loging_table.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Version 4.X.X.X For SQL 2005 and Up\98_SampleConfigurationStatement.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Version 4.X.X.X For SQL 2005 and Up\02_db_maint_script_package_V4.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\023_calculate_next_run_time.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\021_hfn_week_number_of_month.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\022_last_day_of_month.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Calculate_Date.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="DeskTop inventory\create_table.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="DeskTop inventory\1_create_combined_sheet_with_id.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="DeskTop inventory\FN_GetName.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="DeskTop inventory\FN_GetPhoneNumber.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="DeskTop inventory\transfer_data.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="DeskTop inventory\Query.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="DeskTop inventory\FN_SplitString.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\How to find duplicate SID.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="PS And SQL Installation\ConfigurationFile.ini">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="PS And SQL Installation\ConfigurationFile_Uninstall.ini">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="PS And SQL Installation\SQL_Installation_cmd.ps1">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="PS And SQL Installation\Automation_SQL_Installation_LocalVersion.ps1">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HA_MetaData\Stored Procedure\hsp_stats_ha_server_db_size_by_year_month.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Query_ip_fqdn.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Version 4.X.X.X For SQL 2005 and Up\03_post_installation.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="PS And SQL Installation\SQL2014_UNinstallation_cmd.ps1">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="DeskTop inventory\3_transfer_data.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Merge.ps1">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Reindex_Databases.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Setup_Alert.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Alert\BlockingSession.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Alert\LongRunningJob.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Alert\LongRunningQuery.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Alert\DiskSpace.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Add_login_SA_Permission.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\LiteSpeed\Restore.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Change Collation\How to.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Audit\Audit.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HA_MetaData\Version Two\Query_Historic_Stats_Server_DB_Size.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Admin.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\query_user_access_info_from.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\WHITE_Replicaton\Script.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\WHITE_Replicaton\1_drop_subscription.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\WHITE_Replicaton\2_drop_articles.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\WHITE_Replicaton\publisher_09_add_articles.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\WHITE_Replicaton\publisher_11_add_subscription.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\WHITE_Replicaton\Publication_create\Publication_VCH_UAT.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\WHITE_Replicaton\Publication_create\Publication_FHA_UAT.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\WHITE_Replicaton\3_drop_publication.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\WHITE_Replicaton\4_set_database_replication_to_false.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Query_Deadlock_BlockingSession_ErrorLog.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Query_IO_For_Every_DBFile.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Query_CLusterNode_SharedDisk.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="New Feature Exploration\ServiceBrokerExample1DB.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="CMDB_Development\create_refresh_job.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Query_Instance_Node_Database_Contact.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Query_Latch_Wait_Stats.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Query_CMDB.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Query_Last_running_statement_by_SPID.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Restore Log\Restore_Backups_in_folder_with_move.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Restore Log\Restore_logfiles_from_a_folder.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Restore Log\restore_statement_generated_by_backup.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\create_login_dbuser_adding_into_a_fixed_server_database_role_and_grant_permission.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Security\SP_grant_account_db_role_on_all_database.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Security\create_db_user_grant_permission.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Security\List_All_Database_User_Login_Role.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\WHITE_Replicaton\Refresh_Change_Publication_Database_Procedure .sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\WHITE_Replicaton\Publication_create\Publication_Created_By_Parameter.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Take_Database_Offline.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\WHITE_Replicaton\5_set_database_replication_to_true.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Projects\WHITE_Replicaton\6_create_publication.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Query_ALL_Orphan_DB_User.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Create_Standard_Audit.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Restore Log\SP_Restore_logfile_from_a_folder_with_one_log_backup_one_file.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Query_Locks_of_current_db.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Encryption\Create_Encryption_key.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Query_user_database_role_schema_owner.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <BuildContributorArgument Include="OutDir=$(OutDir)" />
+  </ItemGroup>
+</Project>
