@@ -1,0 +1,75 @@
+﻿1)
+
+{ I am presuming these are Server 2008 or newer servers… }
+
+On each corresponding server, can you copy the INF file to the server (cut/paste works) and then do the following:
+
+{ note: .txt extensions are used because Outlook is fussy about some filetypes, so I append .txt on the end. }
+
+1)            Open an elevated command prompt on the target server
+2)            Generate a CSR with:       certreq –new    <servername>.inf.txt    <servername>.req
+3)            Send the <servername>.req file to a CA Manager  (me!)
+4)            The CA Manager will validate the request, and if appropriate, sign the request and return it to the operator as <servername>.cer.txt
+5)            The operator assembles the certificate in the computer store with the command:      certreq –accept    <servername>.cer.txt
+6)            The operator verifies the certificate is valid by opening the local server certificate store and verifying that the certificate is in place and valid.
+7)            The operator binds the certificate to their application (example – IIS)
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2)
+
+
+;----------------- request.inf ----------------- 
+[Version] 
+Signature="$Windows NT$ 
+
+[NewRequest]
+Subject = "CN=svmssrs01.phsabc.ehcnet.ca, OU=Database Services, O=BCCSS, L=Burnaby, S=British Columbia, C=CA"   ; replace with a properly formatted Subject 
+KeySpec = 1 
+KeyLength = 2048 
+Exportable = FALSE
+MachineKeySet = TRUE 
+SMIME = False 
+PrivateKeyArchive = FALSE 
+UserProtected = FALSE 
+UseExistingKeySet = FALSE 
+ProviderName = "Microsoft RSA SChannel Cryptographic Provider" 
+ProviderType = 12
+RequestType = PKCS10 
+KeyUsage = 0xa0 
+
+[RequestAttributes]
+
+[Extensions]
+2.5.29.17 = "{text}
+_continue_ = "dns=wstage13app.healthbc.org&"
+_continue_ = "dns=sdappbslm002.phsabc.ehcnet.ca"  ;uncomment and edit if required
+
+;----------------- request.inf ----------------- 
+
+     
+3)
+the Subject should be something like:
+	CN=sqlreports.phsa.ca, OU=Database Services, O=BCCSS, L=Burnaby, S=British Columbia, C=CA
+	although I don't recommend that, since a simple report only shows the subject, and we don't know where it's installed.
+	I prefer something like: (I'm assuming svmssrs01 is phsabc domain-joined)...
+	CN=svmssrs01.phsabc.ehcnet.ca, OU=Database Services, O=BCCSS, L=Burnaby, S=British Columbia, C=CA
+	because the CN is ignored anyways if there is a SAN
+	and then put both the servername and friendly name in the SAN
+	so:
+	DNS Name=sqlreports.phsa.ca
+	DNS Name=svmssrs01.phsabc.ehcnet.ca
+	and then rinse and repeat for svmssrs02
+	That way, if you're ever troubleshooting, you can look at the cert and know which server you're hitting.
+	and before sending me the request, you can check out the file by doing:
+	CERTUTIL -DUMP   serverrequestfile.req
+	and make sure that it has what you wanted.
+4) When configure SSL for SSRS, you have to remove the certicate from Web Service URL and Report Manager URL first. Then you can apply the new Certificate.
+
+4) Usefull command:
+
+Certutil -dump : for checking the content of certtficate request file
+
+remove SSRS certificate binding:
+netsh http show sslcert : show the binding of certificate
+netsh http delete sslcert ipport=[::]:443 : delete the binding
+
