@@ -25,6 +25,7 @@ DECLARE @HA varchar(16), @eml varchar(60), @smtp varchar(60), @ip varchar(16);
 declare @server_name varchar(500)
 set @server_name = replace(@@servername,'\','_')
 
+/***************************  should not base on IP
 SELECT @ip = convert (varchar(16),CONNECTIONPROPERTY('local_net_address'))
 if @ip like '10.1.%'	or @ip like '10.2.%'
 	set @HA = 'PHSA'
@@ -36,21 +37,22 @@ else if @ip like  '172.%'
 	set @HA = 'FHA'
 else 
 	set @HA = 'KDC'
+*********************************************************/
 
-SET @eml = CASE UPPER(@HA) 
+SET @eml = CASE UPPER(DEFAULT_DOMAIN()) 
 				WHEN 'VCH' THEN @server_name+'@vch.ca'
-				WHEN 'PHSA' THEN @server_name+'@phsa.ca'
+				WHEN 'PHSABC' THEN @server_name+'@phsa.ca'
 				WHEN 'ENG' THEN @server_name+'@phsa.ca'
-				WHEN 'FHA' THEN @server_name+'@fraserhealth.org'
-				WHEN 'KDC' THEN @server_name+'@hssbc.ca'
+				WHEN 'SFHR' THEN @server_name+'@fraserhealth.org'
+				ELSE @server_name+'@hssbc.ca'
 			END
 
-SET @smtp = CASE UPPER(@HA) 
+SET @smtp = CASE UPPER(DEFAULT_DOMAIN()) 
 				WHEN 'VCH' THEN 'smtp.vch.ca'
-				WHEN 'PHSA' THEN 'smtprelay.phsa.ca'
+				WHEN 'PHSABC' THEN 'smtprelay.phsa.ca'
 				WHEN 'ENG' THEN 'smtprelay.phsa.ca'
-				WHEN 'FHA' THEN 'mailserver.fraserhealth.org'
-				WHEN 'KDC' THEN 'smtp.healthbc.org'
+				WHEN 'SFHR' THEN 'mailserver.fraserhealth.org'
+				ELSE 'smtp.healthbc.org'
 			END			
 
 EXECUTE msdb.dbo.sysmail_add_profile_sp
