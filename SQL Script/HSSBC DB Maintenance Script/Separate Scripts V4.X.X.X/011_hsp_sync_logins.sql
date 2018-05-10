@@ -84,8 +84,7 @@ LEFT JOIN ['+@primary_replica+'].master.sys.sql_logins AS l ON sp.[sid]=l.[sid]
 WHERE sp.[type] IN (''U'', ''G'', ''S'') AND
       UPPER(sp.[name]) NOT LIKE ''NT SERVICE\%'' AND
 	  sp.[name] NOT IN (''NT AUTHORITY\SYSTEM'',''sa'') and
-	  sp.[name] NOT like ''##%'' and
-	  sp.is_disabled = 0 ';
+	  sp.[name] NOT like ''##%'' ';
 
 INSERT INTO @primaryLogins
 EXECUTE master.sys.sp_executesql @sql;
@@ -321,7 +320,7 @@ END;
 
 
 --- @print_only=0: Execute the queue.
-IF (@print_only=0)
+IF (@print_only=0 and @sql not like '%##%')
 	EXECUTE master.sys.sp_executesql @sql;
 
 GO

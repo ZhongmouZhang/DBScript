@@ -1,6 +1,6 @@
 ﻿
-$dir = "C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X"
-$outFile = "C:\work\DBScript\HSSBC DB Maintenance Script\Version 4.X.X.X For SQL 2005 and Up\02_db_maint_script_package_V4031.sql"
+$dir = "C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X"
+$outFile = "C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Version 4.X.X.X For SQL 2005 and Up\02_db_maint_script_package_V4031.sql"
 
 # Build the file list
 $fileList = Get-ChildItem -Path $dir -Filter *.sql -File | % { $_.FullName}

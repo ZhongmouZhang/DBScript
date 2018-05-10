@@ -1,9 +1,9 @@
-------------Merging Date and Time: 06/16/2016 13:46:59 --------------------
+------------Merging Date and Time: 05/10/2018 13:54:43 --------------------
 
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\001_all_parameters.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\001_all_parameters.sql --------------------
 			/************************************
 			1.	#backup_folder:
 					Changed to  #full_backup_folder (added in V4.0.0.0)
@@ -25,7 +25,7 @@
 			4.1	#reindex_online_only_day_time  d hh:mm (1:Monday, .... 7: Sunday. one day/record)
 				#excluded_from_default_reindex_online_only
 				 
-			4.2 #reindex_all_day_time d hh:mm (1:Monday, .... 7: Sunday. one day/record)
+			4.2 #reindex_all d hh:mm (1:Monday, .... 7: Sunday. one day/record)
 				#excluded_from_default_reindex_all
 			
 				
@@ -62,10 +62,12 @@ begin
 	)
 
 	insert into tbl_dic_parameter values ('#full_backup_folder')
+	insert into tbl_dic_parameter values ('#differential_backup_folder')
 	insert into tbl_dic_parameter values ('#log_backup_folder')
 	insert into tbl_dic_parameter values ('#excluded_from_default_full_backup')
 	insert into tbl_dic_parameter values ('#full_backup_retention_day')
 	insert into tbl_dic_parameter values ('#log_backup_retention_day')
+	insert into tbl_dic_parameter values ('#differential_backup_retention_day')
 	insert into tbl_dic_parameter values ('#excluded_from_default_check_integrity')
 	insert into tbl_dic_parameter values ('#excluded_from_default_reindex_online_only')
 	insert into tbl_dic_parameter values ('#excluded_from_default_reindex_all')
@@ -90,6 +92,7 @@ begin
 		parameter varchar(128) primary key
 	)
 	insert into tbl_dic_action values ('#full_backup')
+	insert into tbl_dic_action values ('#differential_backup')
 	insert into tbl_dic_action values ('#log_backup')
 	insert into tbl_dic_action values ('#check_integrity')
 	insert into tbl_dic_action values ('#reindex_online_only')
@@ -122,7 +125,7 @@ end
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\002_create_parameter_action_logging_version_table.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\002_create_parameter_action_logging_version_table.sql --------------------
 
 
 use master
@@ -224,7 +227,7 @@ go
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\003_hsp_set_migrate_parameter.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\003_hsp_set_migrate_parameter.sql --------------------
 USE [master]
 GO
 
@@ -271,7 +274,7 @@ go
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\004_hsp_migrate_action.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\004_hsp_migrate_action.sql --------------------
 USE [master]
 GO
 
@@ -318,7 +321,7 @@ go
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\005_hsp_schedule_default_action.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\005_hsp_schedule_default_action.sql --------------------
 USE [master]
 GO
 
@@ -349,7 +352,7 @@ go
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\006_hfn_week_number_of_month.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\006_hfn_week_number_of_month.sql --------------------
 if exists (select * from dbo.sysobjects where id = object_id(N'hfn_week_number_in_month'))
 drop function hfn_week_number_in_month
 GO
@@ -369,7 +372,7 @@ go
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\007_hfn_last_day_of_month.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\007_hfn_last_day_of_month.sql --------------------
 if exists (select * from dbo.sysobjects where id = object_id(N'hfn_last_day_of_month'))
 drop function hfn_last_day_of_month
 GO
@@ -396,7 +399,7 @@ go
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\008_hsp_calculate_next_run_time.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\008_hsp_calculate_next_run_time.sql --------------------
 use [master]
 go
 
@@ -509,7 +512,62 @@ go
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\010_set_migrate_parameters_action.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\009_hsp_setup_linked_server_for_ag.sql --------------------
+USE [master]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'hsp_setup_linked_server_for_ag') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure hsp_setup_linked_server_for_ag
+GO
+
+
+create   proc [dbo].hsp_setup_linked_server_for_ag
+
+as
+
+declare @server_name nvarchar(128)
+set @server_name=''
+
+if (SELECT SERVERPROPERTY ('IsHadrEnabled'))=1
+begin 
+	while 1=1
+	begin
+		select @server_name =  min(replica_server_name )
+		from sys.availability_replicas
+		where replica_server_name != @@SERVERNAME and replica_server_name > @server_name
+
+		if @server_name is null
+			break
+
+		if not exists (select * from sys.servers where name = @server_name)
+		begin
+			EXEC master.dbo.sp_addlinkedserver @server = @server_name, @srvproduct=N'SQL Server'
+ 			EXEC master.dbo.sp_addlinkedsrvlogin @rmtsrvname=@server_name,@useself=N'True',@locallogin=NULL,@rmtuser=NULL,@rmtpassword=NULL
+	
+			EXEC master.dbo.sp_serveroption @server=@server_name, @optname=N'collation compatible', @optvalue=N'false'
+			EXEC master.dbo.sp_serveroption @server=@server_name, @optname=N'data access', @optvalue=N'true'
+			EXEC master.dbo.sp_serveroption @server=@server_name, @optname=N'dist', @optvalue=N'false'
+			EXEC master.dbo.sp_serveroption @server=@server_name, @optname=N'pub', @optvalue=N'false'
+			EXEC master.dbo.sp_serveroption @server=@server_name, @optname=N'rpc', @optvalue=N'true'
+			EXEC master.dbo.sp_serveroption @server=@server_name, @optname=N'rpc out', @optvalue=N'true'
+			EXEC master.dbo.sp_serveroption @server=@server_name, @optname=N'sub', @optvalue=N'false'
+			EXEC master.dbo.sp_serveroption @server=@server_name, @optname=N'connect timeout', @optvalue=N'0'
+			EXEC master.dbo.sp_serveroption @server=@server_name, @optname=N'collation name', @optvalue=null
+			EXEC master.dbo.sp_serveroption @server=@server_name, @optname=N'lazy schema validation', @optvalue=N'false'
+			EXEC master.dbo.sp_serveroption @server=@server_name, @optname=N'query timeout', @optvalue=N'0'
+			EXEC master.dbo.sp_serveroption @server=@server_name, @optname=N'use remote collation', @optvalue=N'true'
+			EXEC master.dbo.sp_serveroption @server=@server_name, @optname=N'remote proc transaction promotion', @optvalue=N'true'
+		end
+	end
+end
+
+go
+
+
+
+
+
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\010_set_migrate_parameters_action.sql --------------------
 
 use [master]
 go
@@ -532,9 +590,13 @@ reconfigure  with override
 
 	exec hsp_set_migrate_parameter 'Y', 1, '#backup_folder', '#full_backup_folder', 'K:\SQL_Backup\full\'
 	exec hsp_set_migrate_parameter 'Y', 2, '#backup_folder', '#log_backup_folder', 'K:\SQL_Backup\log\'
-	exec hsp_set_migrate_parameter 'N', 3, '#excluded_from_default_full_backup', '#excluded_from_default_full_backup', ''
+	exec hsp_set_migrate_parameter 'Y', 3, '', '#differential_backup_folder', 'K:\SQL_Backup\diff\'
 	exec hsp_set_migrate_parameter 'Y', 4, '#backup_retention_day', '#full_backup_retention_day', '3'
 	exec hsp_set_migrate_parameter 'Y', 5, '#backup_retention_day', '#log_backup_retention_day', '3'
+	exec hsp_set_migrate_parameter 'Y', 6, '#', '#differential_backup_retention_day', '14'
+
+	exec hsp_set_migrate_parameter 'N', 7, '#excluded_from_default_full_backup', '#excluded_from_default_full_backup', ''
+	exec hsp_set_migrate_parameter 'N', 8, '', '#excluded_from_default_differential_backup', ''
 
 	exec hsp_set_migrate_parameter 'N', 11, '#excluded_from_default_check_integrity', '#excluded_from_default_check_integrity', ''
 	exec hsp_set_migrate_parameter 'N', 21, '#excluded_from_default_reindex_online_only', '#excluded_from_default_reindex_online_only', ''
@@ -583,6 +645,9 @@ insert into dbo.tbl_maint_action values (71, '#adhoc_backup','ITAM','onetime',0,
 
 insert into dbo.tbl_maint_action values (81, '#shrink_log_file','default','daily',0,0,'22:00',null,null,'2015-05-21 16:00:00')
 
+insert into dbo.tbl_maint_action values (2, '#differential_backup','default','weekly',6,0,'22:00',null,null,'2015-05-21 16:00:00')
+
+
 ***********************************/
 
 if not exists (select * from sysobjects where id = object_id(N'tbl_maint_setting') and xtype='U')
@@ -614,7 +679,7 @@ go
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\020_hsp_script_version_control.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\020_hsp_script_version_control.sql --------------------
  /*************************************************************************
 
 	Version Control Stored procedure
@@ -651,7 +716,7 @@ go
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\021_hfn_week_number_of_month.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\021_hfn_week_number_of_month.sql --------------------
 if exists (select * from dbo.sysobjects where id = object_id(N'hfn_week_number_in_month'))
 drop function hfn_week_number_in_month
 GO
@@ -670,7 +735,7 @@ go
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\022_last_day_of_month.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\022_last_day_of_month.sql --------------------
 if exists (select * from dbo.sysobjects where id = object_id(N'hfn_last_day_of_month'))
 drop function hfn_last_day_of_month
 GO
@@ -695,7 +760,7 @@ go
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\023_calculate_next_run_time.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\023_calculate_next_run_time.sql --------------------
 use [master]
 go
 
@@ -808,7 +873,7 @@ go
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\024_hsp_maint_log.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\024_hsp_maint_log.sql --------------------
 USE [master]
 GO
 
@@ -850,7 +915,7 @@ go
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\025_hfn_get_retention_day.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\025_hfn_get_retention_day.sql --------------------
 if exists (select * from dbo.sysobjects where id = object_id(N'hfn_get_retention_day'))
 drop function hfn_get_retention_day
 GO
@@ -891,7 +956,7 @@ go
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\026_hfn_get_backup_path.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\026_hfn_get_backup_path.sql --------------------
 if exists (select * from dbo.sysobjects where id = object_id(N'hfn_get_backup_path'))
 drop function hfn_get_backup_path
 GO
@@ -924,7 +989,7 @@ go
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\030_hsp_get_candidate_database_list.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\030_hsp_get_candidate_database_list.sql --------------------
 use [master]
 go
 
@@ -954,6 +1019,24 @@ begin
 								-- exclude the dbs which are specifically excluded
 				and not exists (select * from master.dbo.tbl_maint_action ma
 								where [action] = '#full_backup' and database_name = db.name) 
+								-- exclude the dbs which have their own backup schedule
+				)
+		)
+		and  state = 0 and is_read_only = 0 
+end
+else if @action = '#differential_backup'
+begin
+	insert into #temp 
+	select rtrim(name) from master.sys.databases db
+	where ( name = @database_name 
+			or (@database_name='default' 
+				and name not in ('tempdb','distribution', 'master','model','msdb') 
+				and not exists (select * from master.dbo.tbl_maint_parameter bp 
+								where parameter_name = '#excluded_from_default_differential_backup' 
+								and db.name=bp.database_name)  
+								-- exclude the dbs which are specifically excluded
+				and not exists (select * from master.dbo.tbl_maint_action ma
+								where [action] = @action and database_name = db.name) 
 								-- exclude the dbs which have their own backup schedule
 				)
 		)
@@ -1040,7 +1123,7 @@ go
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\040_hsp_test_create_subfolder.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\040_hsp_test_create_subfolder.sql --------------------
  
 /*********************************************************************
 
@@ -1091,7 +1174,7 @@ go
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\050_hsp_delete_obsolete_backup.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\050_hsp_delete_obsolete_backup.sql --------------------
  
 /*********************************************************************
 
@@ -1227,7 +1310,7 @@ go
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\051_hsp_delete_latest_full_backup_with_dbname.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\051_hsp_delete_latest_full_backup_with_dbname.sql --------------------
 
 /*****************************************************************************
 
@@ -1296,7 +1379,7 @@ go
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\060_hsp_full_backup_database.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\060_hsp_full_backup_database.sql --------------------
 USE [master]
 GO
 
@@ -1352,7 +1435,7 @@ _next_loop:
 	end
 	else
 	begin
-		set @stt = 'backup database [' + @dbname + '] to Disk=''' + @dest + ''' with init,stats'
+		set @stt = 'backup database [' + @dbname + '] to Disk=''' + @dest + ''' with init,stats,BUFFERCOUNT = 2200,BLOCKSIZE = 65536 ,MAXTRANSFERSIZE=2097152'
 		if convert (int, substring (convert(varchar (20),SERVERPROPERTY ('ProductVersion')),1, 
 			charindex ('.',convert(varchar (20),SERVERPROPERTY ('ProductVersion')))-1)) >= 10
 		begin
@@ -1368,10 +1451,17 @@ _next_loop:
 		end
 		end
 
+print ' '
+print '--------------------------------------------------------------------------------------'
+print 'Full backup start at: ' + convert (varchar (50), getdate(), 120)
+print ' '
 	print 'Full backup command: ' + @stt
 	print ' '
 	EXEC (@stt)
-	
+
+print ' '
+Print 'Full Backup end at: ' + convert (varchar (50), getdate(), 120)
+
 	if (@@error != 0)
 	begin
 		raiserror ('Full backup of the %s database on instance %s failed',11,1, @dbname, @@Servername)
@@ -1386,7 +1476,7 @@ go
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\061_hsp_adhoc_backup_database.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\061_hsp_adhoc_backup_database.sql --------------------
 USE [master]
 GO
 
@@ -1489,7 +1579,7 @@ go
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\070_hsp_mirror_db_failover_time.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\070_hsp_mirror_db_failover_time.sql --------------------
 
 
  /*****************************************
@@ -1549,7 +1639,7 @@ go
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\080_hsp_mirror_db_failover_fullbackup.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\080_hsp_mirror_db_failover_fullbackup.sql --------------------
 
 /****************************************************************
 1. Detect if there is any mirroring database. 
@@ -1605,7 +1695,7 @@ go
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\090_hsp_log_backup_database.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\090_hsp_log_backup_database.sql --------------------
  
 
 
@@ -1717,9 +1807,17 @@ _next_loop:
 		end
 	end
 
+print ' '
+print '--------------------------------------------------------------------------------------'
+print 'Log backup start at: ' + convert (varchar (50), getdate(), 120)
+print ' '
+
 	print 'Log backup command: ' + @stt
 	print ' '
 	EXEC (@stt)
+
+print ' '
+Print 'Log Backup end at: ' + convert (varchar (50), getdate(), 120)
 	
 	if (@@error != 0)
 	begin
@@ -1735,7 +1833,7 @@ go
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\091_hsp_log_backup_database_with_dbname.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\091_hsp_log_backup_database_with_dbname.sql --------------------
 -----------
 ----------
 ----------
@@ -1842,7 +1940,7 @@ go
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\100_hsp_check_integrity.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\100_hsp_check_integrity.sql --------------------
 
 
 /****************************************************************
@@ -1891,7 +1989,7 @@ go
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\110_hsp_reindex.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\110_hsp_reindex.sql --------------------
 
 
 /***********************************************************************
@@ -2187,7 +2285,339 @@ GO
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\120_hsp_update_statistics.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\11_hsp_sync_logins.sql --------------------
+use [master]
+go
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].hsp_sync_logins') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure [dbo].hsp_sync_logins
+GO
+
+
+/*
+
+USAGE:      EXECUTE dbo.SyncLogins
+                @primary_replica,		-- {name of SOURCE linked server}
+				@allow_drop_logins,		-- 1=allow script to drop logins
+				@print_only				-- 1=only print the T-SQL.
+
+Don't sync sa and the account started with "##'
+
+
+*/
+create PROCEDURE dbo.hsp_sync_logins
+	@primary_replica	sysname=NULL,
+	@allow_drop_logins	bit=1,
+	@print_only			bit=0     -- 0: execute the SQL Statements.  1. only print the statemens
+AS
+
+
+
+SET NOCOUNT ON;
+DECLARE @sql nvarchar(max), @msg nvarchar(max);
+
+
+
+
+--- Thanks, sqlDimsJesper!
+IF (@primary_replica NOT IN (SELECT [name] FROM sys.servers)) BEGIN;
+    THROW 50000, N'Primary replica is not a linked server.', 16;
+    RETURN;
+END;
+
+
+IF (@primary_replica IS NULL) BEGIN;
+	SELECT @primary_replica=primary_replica
+    FROM sys.dm_hadr_availability_group_states;
+
+	IF (@@ROWCOUNT>1) BEGIN;
+		THROW 50000, N'More than one availability group exists on server, please specify @primary_replica.', 16;
+		RETURN;
+	END;
+
+	IF (@primary_replica IS NULL) BEGIN;
+		THROW 50000, N'No availability group found, please specify @primary_replica.', 16;
+		RETURN;
+	END;
+END;
+
+IF (@primary_replica=@@SERVERNAME) BEGIN;
+	PRINT N'This server is the primary replica. No changes will be made.';
+	RETURN;
+END;
+
+
+
+
+--- These are the logins (Windows user and groups, SQL logins) from
+--- the primary replica.
+DECLARE @primaryLogins TABLE (
+	[name]					sysname NOT NULL,
+	[sid]					varbinary(85) NOT NULL,
+	[type]					char(1) NOT NULL,
+	is_disabled				bit NULL,
+	default_database_name	sysname NULL,
+	default_language_name	sysname NULL,
+	is_policy_checked		bit NULL,
+	is_expiration_checked	bit NULL,
+	password_hash			varbinary(256) NULL,
+	PRIMARY KEY CLUSTERED ([sid])
+);
+
+SET @sql=N'
+SELECT sp.[name], sp.[sid], sp.[type], sp.is_disabled, sp.default_database_name,
+       sp.default_language_name, l.is_policy_checked, l.is_expiration_checked, l.password_hash
+FROM ['+@primary_replica+'].master.sys.server_principals AS sp
+LEFT JOIN ['+@primary_replica+'].master.sys.sql_logins AS l ON sp.[sid]=l.[sid]
+WHERE sp.[type] IN (''U'', ''G'', ''S'') AND
+      UPPER(sp.[name]) NOT LIKE ''NT SERVICE\%'' AND
+	  sp.[name] NOT IN (''NT AUTHORITY\SYSTEM'',''sa'') and
+	  sp.[name] NOT like ''##%'' and
+	  sp.is_disabled = 0 ';
+
+INSERT INTO @primaryLogins
+EXECUTE master.sys.sp_executesql @sql;
+
+-- select * from @primaryLogins
+
+--- These are the server roles on the primary replica.
+DECLARE @primaryRoles TABLE (
+	[sid]				varbinary(85) NOT NULL,
+	[name]				sysname NOT NULL,
+	PRIMARY KEY CLUSTERED ([sid])
+);
+
+SET @sql=N'
+SELECT sr.[sid], sr.[name]
+FROM ['+@primary_replica+'].master.sys.server_principals AS sr
+WHERE -- sr.is_fixed_role=0 AND
+      sr.[type]=''R''';
+
+INSERT INTO @primaryRoles
+EXECUTE master.sys.sp_executesql @sql;
+
+
+--- These are the role members of the server roles on
+--- the primary replica.
+DECLARE @primaryMembers TABLE (
+	role_sid			varbinary(85) NOT NULL,
+	member_sid			varbinary(85) NOT NULL,
+	PRIMARY KEY CLUSTERED (role_sid, member_sid)
+);
+
+SET @sql=N'
+SELECT r.[sid], m.[sid]
+FROM ['+@primary_replica+N'].master.sys.server_principals AS r
+INNER JOIN ['+@primary_replica+N'].master.sys.server_role_members AS rm ON r.principal_id=rm.role_principal_id
+INNER JOIN ['+@primary_replica+N'].master.sys.server_principals AS m ON rm.member_principal_id=m.principal_id';
+
+INSERT INTO @primaryMembers
+EXECUTE master.sys.sp_executesql @sql;
+
+
+--- These are the server-level permissions on the
+--- primary replica.
+DECLARE @primaryPermissions TABLE (
+	state_desc			nvarchar(120) NOT NULL,
+	[permission_name]	nvarchar(256) NOT NULL,
+	principal_name		sysname NOT NULL,
+	PRIMARY KEY CLUSTERED ([permission_name], principal_name)
+);
+	
+SET @sql=N'
+SELECT p.state_desc, p.[permission_name], sp.[name]
+FROM ['+@primary_replica+'].master.sys.server_permissions AS p
+INNER JOIN ['+@primary_replica+'].master.sys.server_principals AS sp ON p.grantee_principal_id=sp.principal_id
+WHERE p.class=100';
+
+INSERT INTO @primaryPermissions
+EXECUTE master.sys.sp_executesql @sql;
+
+
+--- This table variable contains the "run queue" of all commands
+--- we want to execute on the local (secondary) replica, ordered
+--- by "seq".
+DECLARE @queue TABLE (
+	seq					int IDENTITY(1, 1) NOT NULL,
+	[sql]				nvarchar(max) NOT NULL,
+	PRIMARY KEY CLUSTERED (seq)
+);
+
+
+-------------------------------------------------------------------------------
+
+
+
+--- Login doesn't exist on the secondary - CREATE.
+INSERT INTO @queue ([sql])
+SELECT N'
+	CREATE LOGIN ['+p.[name]+'] '+(CASE
+			WHEN p.[type]='S'
+			THEN N'WITH PASSWORD=0x'+CONVERT(nvarchar(max), p.password_hash, 2)+N' HASHED, CHECK_POLICY=OFF, SID=0x'+CONVERT(nvarchar(max), p.[sid], 2)+N', '
+			WHEN p.[type] IN ('U', 'G')
+			THEN N'FROM WINDOWS WITH ' END)+
+		N'DEFAULT_DATABASE=['+p.default_database_name+N']'+
+		ISNULL(N', DEFAULT_LANGUAGE='+p.default_language_name, N'')+N';'
+FROM @primaryLogins AS p
+WHERE p.[sid] NOT IN (SELECT [sid] FROM master.sys.server_principals) AND
+	  p.[type] IN ('U', 'G', 'S');
+
+
+--- Login exists but has been enabled/disabled - ALTER.
+INSERT INTO @queue ([sql])
+SELECT N'
+	ALTER LOGIN ['+ISNULL(sp.[name], x.[name])+']'+
+		(CASE WHEN x.is_disabled=0 AND  sp.is_disabled=1 THEN N' ENABLE'
+		      WHEN x.is_disabled=1 AND (sp.is_disabled=0 OR sp.[sid] IS NULL) THEN N' DISABLE' END)+N';'
+FROM @primaryLogins AS x
+LEFT JOIN master.sys.server_principals AS sp ON x.[sid]=sp.[sid]
+WHERE x.is_disabled!=sp.is_disabled OR
+      x.is_disabled=1 AND sp.[sid] IS NULL;
+
+
+--- Login exists but has changed in some respect - ALTER.
+INSERT INTO @queue ([sql])
+SELECT N'
+	ALTER LOGIN ['+sp.[name]+'] WITH '+
+		SUBSTRING(
+		(CASE WHEN x.password_hash!=l.password_hash
+		      THEN N', PASSWORD=0x'+CONVERT(nvarchar(max), x.password_hash, 2)+N' HASHED'
+			  ELSE N'' END)+
+		(CASE WHEN ISNULL(x.default_database_name, N'master')!=ISNULL(sp.default_database_name, N'master')
+		      THEN ', DEFAULT_DATABASE=['+x.default_database_name+N']'
+			  ELSE N'' END)+
+		(CASE WHEN x.default_language_name!=sp.default_language_name
+		      THEN ', DEFAULT_LANGUAGE='+x.default_language_name
+			  ELSE N'' END)+
+		(CASE WHEN x.[name]!=sp.[name]
+		      THEN ', NAME=['+x.[name]+N']'
+			  ELSE N'' END)+
+		(CASE WHEN x.is_policy_checked!=l.is_policy_checked
+		      THEN ', CHECK_POLICY='+(CASE x.is_policy_checked WHEN 1 THEN N'ON' ELSE N'OFF' END)
+			  ELSE N'' END)+
+		(CASE WHEN x.is_expiration_checked!=l.is_expiration_checked
+		      THEN ', CHECK_EXPIRATION='+(CASE x.is_expiration_checked WHEN 1 THEN N'ON' ELSE N'OFF' END)
+			  ELSE N'' END), 3, 10000)+N';'
+FROM @primaryLogins AS x
+INNER JOIN master.sys.server_principals AS sp ON x.[sid]=sp.[sid]
+LEFT JOIN master.sys.sql_logins AS l ON sp.[sid]=l.[sid]
+WHERE x.password_hash!=l.password_hash OR
+	  ISNULL(x.default_database_name, N'master')!=ISNULL(sp.default_database_name, N'master') OR
+	  ISNULL(x.default_language_name, N'us_english')!=ISNULL(sp.default_language_name, N'us_english') OR
+	  x.[name]!=sp.[name] OR
+	  ISNULL(x.is_policy_checked, 0)!=ISNULL(l.is_policy_checked, 0) OR
+	  ISNULL(x.is_expiration_checked, 0)!=ISNULL(l.is_expiration_checked, 0);
+
+
+-------------------------------------------------------------------------------
+--- Roles that don't exist on the primary - DROP.
+INSERT INTO @queue ([sql])
+SELECT N'
+	DROP ROLE ['+sp.[name]+N'];'
+FROM master.sys.server_principals AS sp
+WHERE is_fixed_role=0 AND
+	  sp.[type]='R' AND
+	  sp.[sid] NOT IN (SELECT [sid] FROM @primaryRoles);
+
+
+--- Roles that don't exist on the secondary - CREATE.
+INSERT INTO @queue ([sql])
+SELECT N'
+	CREATE SERVER ROLE ['+r.[name]+N'];'
+FROM @primaryRoles AS r
+WHERE [sid] NOT IN (
+	SELECT [sid]
+	FROM sys.server_principals
+	WHERE -- is_fixed_role=0 AND
+		  [type]='R');
+
+
+-------------------------------------------------------------------------------
+--- Revoke role memberships:
+
+INSERT INTO @queue ([sql])
+SELECT N'
+	ALTER SERVER ROLE ['+r.[name]+N'] DROP MEMBER ['+m.[name]+N'];'
+FROM sys.server_role_members AS rm
+INNER JOIN sys.server_principals AS r ON r.principal_id=rm.role_principal_id
+INNER JOIN sys.server_principals AS m ON m.principal_id=rm.member_principal_id
+LEFT JOIN @primaryMembers AS pm ON pm.member_sid=m.[sid] AND pm.role_sid=r.[sid]
+WHERE pm.role_sid IS NULL;
+
+
+--- Add server role memberships:
+INSERT INTO @queue ([sql])
+SELECT N'
+	ALTER SERVER ROLE ['+pr.[name]+N'] ADD MEMBER ['+pl.[name]+N'];'
+FROM @primaryMembers AS pm
+INNER JOIN @primaryLogins AS pl ON pm.member_sid=pl.[sid]
+INNER JOIN @primaryRoles AS pr ON pm.role_sid=pr.[sid]
+LEFT JOIN sys.server_principals AS r ON pm.role_sid=r.[sid] AND r.[type]='R'
+LEFT JOIN sys.server_principals AS m ON pm.member_sid=m.[sid]
+LEFT JOIN sys.server_role_members AS rm ON r.principal_id=rm.role_principal_id AND m.principal_id=rm.member_principal_id
+WHERE rm.role_principal_id IS NULL;
+
+
+-------------------------------------------------------------------------------
+--- GRANT/DENY server-level permissions:
+INSERT INTO @queue ([sql])
+SELECT N'
+	'+pp.state_desc+N' '+pp.[permission_name]+N' TO ['+pp.principal_name+'];'
+FROM @primaryPermissions AS pp
+INNER JOIN sys.server_principals AS sp ON pp.principal_name=sp.[name]
+LEFT JOIN sys.server_permissions AS p ON
+    p.grantee_principal_id=sp.principal_id AND
+	p.[permission_name] COLLATE database_default=pp.[permission_name] AND
+	p.class=100
+WHERE pp.state_desc!=p.state_desc COLLATE database_default;
+
+
+
+--- Login doesn't exist on the primary - DROP.
+
+-- Don't sync sa and the account started with "##'
+
+INSERT INTO @queue ([sql])
+SELECT N'
+	DROP LOGIN ['+sp.[name]+N'];'
+FROM master.sys.server_principals AS sp
+WHERE sp.[type] IN ('U', 'G', 'S') AND
+      UPPER(sp.[name]) NOT LIKE 'NT SERVICE\%' AND
+	  sp.[name] NOT IN ('NT AUTHORITY\SYSTEM', 'sa') AND
+	  sp.[sid] NOT IN (SELECT [sid] FROM @primaryLogins) AND
+	  sp.[name] NOT like '##%' and
+	  @allow_drop_logins=1;
+
+--select * from @primaryMembers
+--select * from @primaryLogins
+--select * from @primaryRoles
+
+
+
+-------------------------------------------------------------------------------
+--- Ready to roll:
+
+SET @sql=N'';
+SELECT @sql=@sql+[sql] FROM @queue ORDER BY seq;
+
+
+--- @print_only=1: PRINT the queue.
+WHILE (@print_only=1 AND @sql!=N'') BEGIN;
+	PRINT LEFT(@sql, CHARINDEX(CHAR(13), @sql+CHAR(13))-1);
+	SET @sql=SUBSTRING(@sql, CHARINDEX(CHAR(13), @sql+CHAR(13))+2, LEN(@sql));
+END;
+
+
+--- @print_only=0: Execute the queue.
+IF (@print_only=0)
+	EXECUTE master.sys.sp_executesql @sql;
+
+GO
+
+
+
+
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\120_hsp_update_statistics.sql --------------------
 
 
  /******************************************************************
@@ -2239,7 +2669,7 @@ go
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\130_hsp_check_disk_space.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\130_hsp_check_disk_space.sql --------------------
 
 
 /********************************************************
@@ -2337,7 +2767,7 @@ go
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\131_hsp_get_disk_space.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\131_hsp_get_disk_space.sql --------------------
 USE [master]
 GO
 IF OBJECTPROPERTY ( object_id('hsp_get_disk_space'),'IsProcedure') = 1
@@ -2410,7 +2840,7 @@ GO
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\140_hsp_switch_job_output_file.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\140_hsp_switch_job_output_file.sql --------------------
 
 
 
@@ -2436,7 +2866,7 @@ select @path = parameter_value
 from [master].[dbo].[tbl_maint_parameter] 
 where parameter_name = '#job_output_folder'
 
-set @stt = 'IF NOT EXIST ' + @path + ' md ' + @path
+set @stt = 'IF NOT EXIST "' + @path + '" md "' + @path + '"'
 --print @stt
 EXEC xp_cmdshell @stt
 
@@ -2460,7 +2890,7 @@ go
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\150_hsp_delete_obsolete_job_output_file.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\150_hsp_delete_obsolete_job_output_file.sql --------------------
 /*********************************************************************
 
 		Delete the job output file older than the retention day
@@ -2529,7 +2959,7 @@ go
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\160_hsp_recycle_history_and_error_log.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\160_hsp_recycle_history_and_error_log.sql --------------------
  
 /**************************************************************
 
@@ -2634,7 +3064,7 @@ go
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\170_hsp_shrink_log_file.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\170_hsp_shrink_log_file.sql --------------------
 use master
 go
 
@@ -2709,7 +3139,7 @@ go
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\180_hsp_differential_backup_database.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\180_hsp_differential_backup_database.sql --------------------
 USE [master]
 GO
 
@@ -2736,7 +3166,7 @@ _next_loop:
 	if @dbname is null
 		break
 	-- select the backup folder
-	select @path = dbo.hfn_get_backup_path('#full_backup_folder',@dbname)
+	select @path = dbo.hfn_get_backup_path('#differential_backup_folder',@dbname)
 	
 	-- delete the obsolete differential backup of the database
 	exec hsp_delete_obsolete_backup 3, @dbname
@@ -2774,9 +3204,16 @@ _next_loop:
 		end
 	end
 
+print ' '
+print '--------------------------------------------------------------------------------------'
+print 'Differential backup start at: ' + convert (varchar (50), getdate(), 120)
+print ' '
 	print 'differential backup command: ' + @stt
 	print ' '
 	EXEC (@stt)
+print ' '
+Print 'Differenctial Backup end at: ' + convert (varchar (50), getdate(), 120)
+
 	
 	if (@@error != 0)
 	begin
@@ -2792,7 +3229,7 @@ go
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\910_hsp_maint_schedule.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\910_hsp_maint_schedule.sql --------------------
 
 use master
 go
@@ -2827,6 +3264,10 @@ declare @id int
 
 -- run the log backup by default
 exec hsp_log_backup_database
+
+
+-- run login sync for AG by default
+exec hsp_sync_logins
 
 
 -- perform the scheduled ad hoc backup first
@@ -2868,6 +3309,10 @@ begin
 	begin
 		exec hsp_full_backup_database
 	end
+	else if @action='#differential_backup'
+	begin
+		exec hsp_differential_backup_database
+	end 	
 	else if @action='#check_integrity'
 	begin
 		exec hsp_check_integrity
@@ -2956,7 +3401,7 @@ go
 
 
 
----------------------------- C:\work\DBScript\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\990_last_script.sql --------------------
+---------------------------- C:\Users\jzhang2\Documents\GitHub\DBScript_V1\DBScript\SQL Script\HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\990_last_script.sql --------------------
  
 /*******************************************************
 

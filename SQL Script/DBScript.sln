@@ -4,14 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 Project("{C8D11400-126E-41CD-887F-60BD40844F9E}") = "DBScript", "DBScript.dbproj", "{67CBC824-A49E-4E9B-A947-360F3DFE65C3}"
 EndProject
 Global
-	GlobalSection(SourceCodeControl) = preSolution
-		SccNumberOfProjects = 1
-		SccProjectUniqueName0 = DBScript.dbproj
-		SccProjectName0 = \u0022$/DBScript.root/DBScript_1\u0022,\u0020PIBAAAAA
-		SccLocalPath0 = ..
-		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
-		SccProjectFilePathRelativizedFromConnection0 = DBScript\\
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

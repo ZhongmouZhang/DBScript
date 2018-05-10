@@ -34,6 +34,10 @@ declare @id int
 exec hsp_log_backup_database
 
 
+-- run login sync for AG by default
+exec hsp_sync_logins
+
+
 -- perform the scheduled ad hoc backup first
 while exists (select * from dbo.tbl_maint_action 
 				where next_start_date_time < GETDATE()
