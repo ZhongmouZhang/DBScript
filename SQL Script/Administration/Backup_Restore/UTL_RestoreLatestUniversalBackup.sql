@@ -59,10 +59,12 @@ begin
 	' from Disk = ''' + @path + @filename + '''
 	' + @with_clause
 
-	--EXEC(@stt)
+	EXEC(@stt)
 	print @stt
 end
 
+
+/**************************
 -- send out the alert email if there is no full backup or the restore fails
 if (@@error!=0 or @filename is null)
 begin	
@@ -74,5 +76,7 @@ begin
 			@Body = 'Please check the backup on the server'
 end
 
+
+*******************/
 
  

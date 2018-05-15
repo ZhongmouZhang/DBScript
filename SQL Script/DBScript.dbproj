@@ -157,6 +157,7 @@
     <Folder Include="Frequently Used Script\Security" />
     <Folder Include="Frequently Used Script\Encryption" />
     <Folder Include="Projects\iTracker" />
+    <Folder Include="Ticket Processing" />
   </ItemGroup>
   <ItemGroup>
     <PropertiesFile Include="Properties\Database.sqlsettings">
@@ -1840,6 +1841,12 @@
       <SubType>NotInBuild</SubType>
     </NotInBuild>
     <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\009_hsp_setup_linked_server_for_ag.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="HSSBC DB Maintenance Script\Separate Scripts V4.X.X.X\011_hsp_sync_logins.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Ticket Processing\IN1722063.sql">
       <SubType>NotInBuild</SubType>
     </NotInBuild>
   </ItemGroup>
