@@ -1849,6 +1849,9 @@
     <NotInBuild Include="Ticket Processing\IN1722063.sql">
       <SubType>NotInBuild</SubType>
     </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Query_Listening_Port.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
   </ItemGroup>
   <ItemGroup>
     <BuildContributorArgument Include="OutDir=$(OutDir)" />

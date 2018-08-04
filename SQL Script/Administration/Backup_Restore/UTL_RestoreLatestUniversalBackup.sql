@@ -23,12 +23,9 @@ as
 declare @filename varchar(100)
 declare @stt nvarchar(2000),@spidstr varchar(4000)
 
-	if (@@version like 'Microsoft SQL Server 2005%' or @@version like 'Microsoft SQL Server 2008%')
-	begin
 		exec sp_configure 'Ole Automation Procedures', '1'
 		exec sp_configure 'xp_cmdshell', '1'
 		reconfigure
-	end
 
 -- get the latest backup file name
 set @stt = 'dir ' + @path + ' /B'

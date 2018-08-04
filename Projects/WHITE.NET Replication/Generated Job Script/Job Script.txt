@@ -1,0 +1,632 @@
+USE [msdb]
+GO
+
+/****** Object:  Job [SDDBSWHT003-BCEHS_WHITE3-publication_white_BCE-SPDBWHTSUB-30]    Script Date: 10/18/2017 10:59:57 AM ******/
+BEGIN TRANSACTION
+DECLARE @ReturnCode INT
+SELECT @ReturnCode = 0
+/****** Object:  JobCategory [REPL-Distribution]    Script Date: 10/18/2017 10:59:57 AM ******/
+IF NOT EXISTS (SELECT name FROM msdb.dbo.syscategories WHERE name=N'REPL-Distribution' AND category_class=1)
+BEGIN
+EXEC @ReturnCode = msdb.dbo.sp_add_category @class=N'JOB', @type=N'LOCAL', @name=N'REPL-Distribution'
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+
+END
+
+DECLARE @jobId BINARY(16)
+EXEC @ReturnCode =  msdb.dbo.sp_add_job @job_name=N'SDDBSWHT003-BCEHS_WHITE3-publication_white_BCE-SPDBWHTSUB-30', 
+		@enabled=1, 
+		@notify_level_eventlog=0, 
+		@notify_level_email=0, 
+		@notify_level_netsend=0, 
+		@notify_level_page=0, 
+		@delete_level=0, 
+		@description=N'No description available.', 
+		@category_name=N'REPL-Distribution', 
+		@owner_login_name=N'distributor_admin', @job_id = @jobId OUTPUT
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+/****** Object:  Step [Distribution Agent startup message.]    Script Date: 10/18/2017 10:59:57 AM ******/
+EXEC @ReturnCode = msdb.dbo.sp_add_jobstep @job_id=@jobId, @step_name=N'Distribution Agent startup message.', 
+		@step_id=1, 
+		@cmdexec_success_code=0, 
+		@on_success_action=3, 
+		@on_success_step_id=0, 
+		@on_fail_action=3, 
+		@on_fail_step_id=0, 
+		@retry_attempts=0, 
+		@retry_interval=0, 
+		@os_run_priority=0, @subsystem=N'TSQL', 
+		@command=N'sp_MSadd_distribution_history @perfmon_increment = 0, @agent_id = 30, @runstatus = 1,  
+                    @comments = N''Starting agent.''', 
+		@server=N'SPDBWHTDIST', 
+		@database_name=N'distribution_white_UAT', 
+		@flags=0
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+/****** Object:  Step [Run agent.]    Script Date: 10/18/2017 10:59:57 AM ******/
+EXEC @ReturnCode = msdb.dbo.sp_add_jobstep @job_id=@jobId, @step_name=N'Run agent.', 
+		@step_id=2, 
+		@cmdexec_success_code=0, 
+		@on_success_action=1, 
+		@on_success_step_id=0, 
+		@on_fail_action=3, 
+		@on_fail_step_id=0, 
+		@retry_attempts=2147483647, 
+		@retry_interval=1, 
+		@os_run_priority=0, @subsystem=N'Distribution', 
+		@command=N'-Subscriber [SPDBWHTSUB] -SubscriberDB [WHITESUB_BCEHS_UAT] -Publisher [SDDBSWHT003] -Distributor [SPDBWHTDIST] -DistributorSecurityMode 1 -Publication [publication_white_BCEHS_UAT] -PublisherDB [BCEHS_WHITE3]    -Continuous', 
+		@server=N'SPDBWHTDIST', 
+		@database_name=N'distribution_white_UAT', 
+		@flags=0, 
+		@proxy_name=N'[REPL][PHSABC\svc_SPDBWHTDIST_BCEH][SDDBSWHT003-BCEHS_WHITE3-publication_white_BCE-SPDBWHTSUB-3]'
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+/****** Object:  Step [Detect nonlogged agent shutdown.]    Script Date: 10/18/2017 10:59:57 AM ******/
+EXEC @ReturnCode = msdb.dbo.sp_add_jobstep @job_id=@jobId, @step_name=N'Detect nonlogged agent shutdown.', 
+		@step_id=3, 
+		@cmdexec_success_code=0, 
+		@on_success_action=2, 
+		@on_success_step_id=0, 
+		@on_fail_action=2, 
+		@on_fail_step_id=0, 
+		@retry_attempts=0, 
+		@retry_interval=0, 
+		@os_run_priority=0, @subsystem=N'TSQL', 
+		@command=N'sp_MSdetect_nonlogged_shutdown @subsystem = ''Distribution'', @agent_id = 30', 
+		@server=N'SPDBWHTDIST', 
+		@database_name=N'distribution_white_UAT', 
+		@flags=0
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+EXEC @ReturnCode = msdb.dbo.sp_update_job @job_id = @jobId, @start_step_id = 1
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+EXEC @ReturnCode = msdb.dbo.sp_add_jobschedule @job_id=@jobId, @name=N'Replication agent schedule.', 
+		@enabled=1, 
+		@freq_type=64, 
+		@freq_interval=0, 
+		@freq_subday_type=0, 
+		@freq_subday_interval=0, 
+		@freq_relative_interval=0, 
+		@freq_recurrence_factor=0, 
+		@active_start_date=20111007, 
+		@active_end_date=99991231, 
+		@active_start_time=0, 
+		@active_end_time=235959, 
+		@schedule_uid=N'de73ab25-c258-4550-af9c-e9d978d63713'
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+EXEC @ReturnCode = msdb.dbo.sp_add_jobserver @job_id = @jobId, @server_name = N'(local)'
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+COMMIT TRANSACTION
+GOTO EndSave
+QuitWithRollback:
+    IF (@@TRANCOUNT > 0) ROLLBACK TRANSACTION
+EndSave:
+
+GO
+
+
+
+USE [msdb]
+GO
+
+/****** Object:  Job [SDDBSWHT003-BCEHS_WHITE3-publication_white_BCEHS_UAT-12]    Script Date: 10/18/2017 10:59:47 AM ******/
+BEGIN TRANSACTION
+DECLARE @ReturnCode INT
+SELECT @ReturnCode = 0
+/****** Object:  JobCategory [REPL-Snapshot]    Script Date: 10/18/2017 10:59:47 AM ******/
+IF NOT EXISTS (SELECT name FROM msdb.dbo.syscategories WHERE name=N'REPL-Snapshot' AND category_class=1)
+BEGIN
+EXEC @ReturnCode = msdb.dbo.sp_add_category @class=N'JOB', @type=N'LOCAL', @name=N'REPL-Snapshot'
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+
+END
+
+DECLARE @jobId BINARY(16)
+EXEC @ReturnCode =  msdb.dbo.sp_add_job @job_name=N'SDDBSWHT003-BCEHS_WHITE3-publication_white_BCEHS_UAT-12', 
+		@enabled=1, 
+		@notify_level_eventlog=0, 
+		@notify_level_email=0, 
+		@notify_level_netsend=0, 
+		@notify_level_page=0, 
+		@delete_level=0, 
+		@description=N'No description available.', 
+		@category_name=N'REPL-Snapshot', 
+		@owner_login_name=N'distributor_admin', @job_id = @jobId OUTPUT
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+/****** Object:  Step [Snapshot Agent startup message.]    Script Date: 10/18/2017 10:59:47 AM ******/
+EXEC @ReturnCode = msdb.dbo.sp_add_jobstep @job_id=@jobId, @step_name=N'Snapshot Agent startup message.', 
+		@step_id=1, 
+		@cmdexec_success_code=0, 
+		@on_success_action=3, 
+		@on_success_step_id=0, 
+		@on_fail_action=3, 
+		@on_fail_step_id=0, 
+		@retry_attempts=0, 
+		@retry_interval=0, 
+		@os_run_priority=0, @subsystem=N'TSQL', 
+		@command=N'sp_MSadd_snapshot_history @perfmon_increment = 0,  @agent_id = 12, @runstatus = 1,  
+                    @comments = N''Starting agent.''', 
+		@server=N'SDDBSWHT003', 
+		@database_name=N'distribution_white_UAT', 
+		@flags=0
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+/****** Object:  Step [Run agent.]    Script Date: 10/18/2017 10:59:47 AM ******/
+EXEC @ReturnCode = msdb.dbo.sp_add_jobstep @job_id=@jobId, @step_name=N'Run agent.', 
+		@step_id=2, 
+		@cmdexec_success_code=0, 
+		@on_success_action=1, 
+		@on_success_step_id=0, 
+		@on_fail_action=3, 
+		@on_fail_step_id=0, 
+		@retry_attempts=10, 
+		@retry_interval=1, 
+		@os_run_priority=0, @subsystem=N'Snapshot', 
+		@command=N'-Publisher [SDDBSWHT003] -PublisherDB [BCEHS_WHITE3] -Distributor [SPDBWHTDIST] -Publication [publication_white_BCEHS_UAT] -DistributorSecurityMode 1 ', 
+		@server=N'SDDBSWHT003', 
+		@database_name=N'distribution_white_UAT', 
+		@flags=0, 
+		@proxy_name=N'[REPL][PHSABC\svc_SPDBWHTDIST_BCEH][SDDBSWHT003-BCEHS_WHITE3-publication_white_BCEHS_UAT-12]'
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+/****** Object:  Step [Detect nonlogged agent shutdown.]    Script Date: 10/18/2017 10:59:47 AM ******/
+EXEC @ReturnCode = msdb.dbo.sp_add_jobstep @job_id=@jobId, @step_name=N'Detect nonlogged agent shutdown.', 
+		@step_id=3, 
+		@cmdexec_success_code=0, 
+		@on_success_action=2, 
+		@on_success_step_id=0, 
+		@on_fail_action=2, 
+		@on_fail_step_id=0, 
+		@retry_attempts=0, 
+		@retry_interval=0, 
+		@os_run_priority=0, @subsystem=N'TSQL', 
+		@command=N'sp_MSdetect_nonlogged_shutdown @subsystem = ''Snapshot'', @agent_id = 12', 
+		@server=N'SDDBSWHT003', 
+		@database_name=N'distribution_white_UAT', 
+		@flags=0
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+EXEC @ReturnCode = msdb.dbo.sp_update_job @job_id = @jobId, @start_step_id = 1
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+EXEC @ReturnCode = msdb.dbo.sp_add_jobschedule @job_id=@jobId, @name=N'Replication agent schedule.', 
+		@enabled=0, 
+		@freq_type=1, 
+		@freq_interval=0, 
+		@freq_subday_type=0, 
+		@freq_subday_interval=0, 
+		@freq_relative_interval=0, 
+		@freq_recurrence_factor=0, 
+		@active_start_date=20170524, 
+		@active_end_date=99991231, 
+		@active_start_time=0, 
+		@active_end_time=235959, 
+		@schedule_uid=N'd1273ad0-eaf7-465e-8aca-906c7e9e838e'
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+EXEC @ReturnCode = msdb.dbo.sp_add_jobserver @job_id = @jobId, @server_name = N'(local)'
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+COMMIT TRANSACTION
+GOTO EndSave
+QuitWithRollback:
+    IF (@@TRANCOUNT > 0) ROLLBACK TRANSACTION
+EndSave:
+
+GO
+
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+USE [msdb]
+GO
+
+/****** Object:  Job [SDDBSWHT003-BCEHS_WHITE3-10]    Script Date: 10/18/2017 10:59:40 AM ******/
+BEGIN TRANSACTION
+DECLARE @ReturnCode INT
+SELECT @ReturnCode = 0
+/****** Object:  JobCategory [REPL-LogReader]    Script Date: 10/18/2017 10:59:40 AM ******/
+IF NOT EXISTS (SELECT name FROM msdb.dbo.syscategories WHERE name=N'REPL-LogReader' AND category_class=1)
+BEGIN
+EXEC @ReturnCode = msdb.dbo.sp_add_category @class=N'JOB', @type=N'LOCAL', @name=N'REPL-LogReader'
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+
+END
+
+DECLARE @jobId BINARY(16)
+EXEC @ReturnCode =  msdb.dbo.sp_add_job @job_name=N'SDDBSWHT003-BCEHS_WHITE3-10', 
+		@enabled=1, 
+		@notify_level_eventlog=0, 
+		@notify_level_email=0, 
+		@notify_level_netsend=0, 
+		@notify_level_page=0, 
+		@delete_level=0, 
+		@description=N'No description available.', 
+		@category_name=N'REPL-LogReader', 
+		@owner_login_name=N'distributor_admin', @job_id = @jobId OUTPUT
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+/****** Object:  Step [Log Reader Agent startup message.]    Script Date: 10/18/2017 10:59:40 AM ******/
+EXEC @ReturnCode = msdb.dbo.sp_add_jobstep @job_id=@jobId, @step_name=N'Log Reader Agent startup message.', 
+		@step_id=1, 
+		@cmdexec_success_code=0, 
+		@on_success_action=3, 
+		@on_success_step_id=0, 
+		@on_fail_action=3, 
+		@on_fail_step_id=0, 
+		@retry_attempts=0, 
+		@retry_interval=0, 
+		@os_run_priority=0, @subsystem=N'TSQL', 
+		@command=N'sp_MSadd_logreader_history @perfmon_increment = 0, @agent_id = 10, @runstatus = 1, 
+                    @comments = N''Starting agent.''', 
+		@server=N'SDDBSWHT003', 
+		@database_name=N'distribution_white_UAT', 
+		@flags=0
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+/****** Object:  Step [Run agent.]    Script Date: 10/18/2017 10:59:40 AM ******/
+EXEC @ReturnCode = msdb.dbo.sp_add_jobstep @job_id=@jobId, @step_name=N'Run agent.', 
+		@step_id=2, 
+		@cmdexec_success_code=0, 
+		@on_success_action=1, 
+		@on_success_step_id=0, 
+		@on_fail_action=3, 
+		@on_fail_step_id=0, 
+		@retry_attempts=2147483647, 
+		@retry_interval=1, 
+		@os_run_priority=0, @subsystem=N'LogReader', 
+		@command=N'-Publisher [SDDBSWHT003] -PublisherDB [BCEHS_WHITE3] -Distributor [SPDBWHTDIST] -DistributorSecurityMode 1  -Continuous', 
+		@server=N'SDDBSWHT003', 
+		@database_name=N'distribution_white_UAT', 
+		@flags=0, 
+		@proxy_name=N'[REPL][PHSABC\svc_SPDBWHTDIST_BCEH][SDDBSWHT003-BCEHS_WHITE3-10]'
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+/****** Object:  Step [Detect nonlogged agent shutdown.]    Script Date: 10/18/2017 10:59:40 AM ******/
+EXEC @ReturnCode = msdb.dbo.sp_add_jobstep @job_id=@jobId, @step_name=N'Detect nonlogged agent shutdown.', 
+		@step_id=3, 
+		@cmdexec_success_code=0, 
+		@on_success_action=2, 
+		@on_success_step_id=0, 
+		@on_fail_action=2, 
+		@on_fail_step_id=0, 
+		@retry_attempts=0, 
+		@retry_interval=0, 
+		@os_run_priority=0, @subsystem=N'TSQL', 
+		@command=N'sp_MSdetect_nonlogged_shutdown @subsystem = ''LogReader'', @agent_id = 10', 
+		@server=N'SDDBSWHT003', 
+		@database_name=N'distribution_white_UAT', 
+		@flags=0
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+EXEC @ReturnCode = msdb.dbo.sp_update_job @job_id = @jobId, @start_step_id = 1
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+EXEC @ReturnCode = msdb.dbo.sp_add_jobschedule @job_id=@jobId, @name=N'Replication agent schedule.', 
+		@enabled=1, 
+		@freq_type=64, 
+		@freq_interval=0, 
+		@freq_subday_type=0, 
+		@freq_subday_interval=0, 
+		@freq_relative_interval=0, 
+		@freq_recurrence_factor=0, 
+		@active_start_date=20170524, 
+		@active_end_date=99991231, 
+		@active_start_time=0, 
+		@active_end_time=235959, 
+		@schedule_uid=N'951aabf3-3bd5-4a98-8999-c04c6dc9991f'
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+EXEC @ReturnCode = msdb.dbo.sp_add_jobserver @job_id = @jobId, @server_name = N'(local)'
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+COMMIT TRANSACTION
+GOTO EndSave
+QuitWithRollback:
+    IF (@@TRANCOUNT > 0) ROLLBACK TRANSACTION
+EndSave:
+
+GO
+
+
+---------------------------------------------------------------------------------------------------------------------------
+USE [msdb]
+GO
+
+/****** Object:  Job [SDDBSWHT003-PHC_WHITE3-publication_white_PHC-SPDBWHTSUB-29]    Script Date: 10/18/2017 10:59:21 AM ******/
+BEGIN TRANSACTION
+DECLARE @ReturnCode INT
+SELECT @ReturnCode = 0
+/****** Object:  JobCategory [REPL-Distribution]    Script Date: 10/18/2017 10:59:21 AM ******/
+IF NOT EXISTS (SELECT name FROM msdb.dbo.syscategories WHERE name=N'REPL-Distribution' AND category_class=1)
+BEGIN
+EXEC @ReturnCode = msdb.dbo.sp_add_category @class=N'JOB', @type=N'LOCAL', @name=N'REPL-Distribution'
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+
+END
+
+DECLARE @jobId BINARY(16)
+EXEC @ReturnCode =  msdb.dbo.sp_add_job @job_name=N'SDDBSWHT003-PHC_WHITE3-publication_white_PHC-SPDBWHTSUB-29', 
+		@enabled=1, 
+		@notify_level_eventlog=0, 
+		@notify_level_email=0, 
+		@notify_level_netsend=0, 
+		@notify_level_page=0, 
+		@delete_level=0, 
+		@description=N'No description available.', 
+		@category_name=N'REPL-Distribution', 
+		@owner_login_name=N'distributor_admin', @job_id = @jobId OUTPUT
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+/****** Object:  Step [Distribution Agent startup message.]    Script Date: 10/18/2017 10:59:21 AM ******/
+EXEC @ReturnCode = msdb.dbo.sp_add_jobstep @job_id=@jobId, @step_name=N'Distribution Agent startup message.', 
+		@step_id=1, 
+		@cmdexec_success_code=0, 
+		@on_success_action=3, 
+		@on_success_step_id=0, 
+		@on_fail_action=3, 
+		@on_fail_step_id=0, 
+		@retry_attempts=0, 
+		@retry_interval=0, 
+		@os_run_priority=0, @subsystem=N'TSQL', 
+		@command=N'sp_MSadd_distribution_history @perfmon_increment = 0, @agent_id = 29, @runstatus = 1,  
+                    @comments = N''Starting agent.''', 
+		@server=N'SPDBWHTDIST', 
+		@database_name=N'distribution_white_UAT', 
+		@flags=0
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+/****** Object:  Step [Run agent.]    Script Date: 10/18/2017 10:59:21 AM ******/
+EXEC @ReturnCode = msdb.dbo.sp_add_jobstep @job_id=@jobId, @step_name=N'Run agent.', 
+		@step_id=2, 
+		@cmdexec_success_code=0, 
+		@on_success_action=1, 
+		@on_success_step_id=0, 
+		@on_fail_action=3, 
+		@on_fail_step_id=0, 
+		@retry_attempts=2147483647, 
+		@retry_interval=1, 
+		@os_run_priority=0, @subsystem=N'Distribution', 
+		@command=N'-Subscriber [SPDBWHTSUB] -SubscriberDB [WHITESUB_PHC_UAT] -Publisher [SDDBSWHT003] -Distributor [SPDBWHTDIST] -DistributorSecurityMode 1 -Publication [publication_white_PHC_UAT] -PublisherDB [PHC_WHITE3]    -Continuous', 
+		@server=N'SPDBWHTDIST', 
+		@database_name=N'distribution_white_UAT', 
+		@flags=0, 
+		@proxy_name=N'[REPL][PHSABC\svc_SPDBWHTDIST_PHC][SDDBSWHT003-PHC_WHITE3-publication_white_PHC-SPDBWHTSUB-29]'
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+/****** Object:  Step [Detect nonlogged agent shutdown.]    Script Date: 10/18/2017 10:59:21 AM ******/
+EXEC @ReturnCode = msdb.dbo.sp_add_jobstep @job_id=@jobId, @step_name=N'Detect nonlogged agent shutdown.', 
+		@step_id=3, 
+		@cmdexec_success_code=0, 
+		@on_success_action=2, 
+		@on_success_step_id=0, 
+		@on_fail_action=2, 
+		@on_fail_step_id=0, 
+		@retry_attempts=0, 
+		@retry_interval=0, 
+		@os_run_priority=0, @subsystem=N'TSQL', 
+		@command=N'sp_MSdetect_nonlogged_shutdown @subsystem = ''Distribution'', @agent_id = 29', 
+		@server=N'SPDBWHTDIST', 
+		@database_name=N'distribution_white_UAT', 
+		@flags=0
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+EXEC @ReturnCode = msdb.dbo.sp_update_job @job_id = @jobId, @start_step_id = 1
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+EXEC @ReturnCode = msdb.dbo.sp_add_jobschedule @job_id=@jobId, @name=N'Replication agent schedule.', 
+		@enabled=1, 
+		@freq_type=64, 
+		@freq_interval=0, 
+		@freq_subday_type=0, 
+		@freq_subday_interval=0, 
+		@freq_relative_interval=0, 
+		@freq_recurrence_factor=0, 
+		@active_start_date=20111007, 
+		@active_end_date=99991231, 
+		@active_start_time=0, 
+		@active_end_time=235959, 
+		@schedule_uid=N'd3da9f47-3847-4ee8-9fd2-ba6737b07009'
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+EXEC @ReturnCode = msdb.dbo.sp_add_jobserver @job_id = @jobId, @server_name = N'(local)'
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+COMMIT TRANSACTION
+GOTO EndSave
+QuitWithRollback:
+    IF (@@TRANCOUNT > 0) ROLLBACK TRANSACTION
+EndSave:
+
+GO
+
+
+------------------------------------------------------------------------------------------------------------------------------
+
+USE [msdb]
+GO
+
+/****** Object:  Job [SDDBSWHT003-PHC_WHITE3-publication_white_PHC_UAT-13]    Script Date: 10/18/2017 10:58:59 AM ******/
+BEGIN TRANSACTION
+DECLARE @ReturnCode INT
+SELECT @ReturnCode = 0
+/****** Object:  JobCategory [REPL-Snapshot]    Script Date: 10/18/2017 10:58:59 AM ******/
+IF NOT EXISTS (SELECT name FROM msdb.dbo.syscategories WHERE name=N'REPL-Snapshot' AND category_class=1)
+BEGIN
+EXEC @ReturnCode = msdb.dbo.sp_add_category @class=N'JOB', @type=N'LOCAL', @name=N'REPL-Snapshot'
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+
+END
+
+DECLARE @jobId BINARY(16)
+EXEC @ReturnCode =  msdb.dbo.sp_add_job @job_name=N'SDDBSWHT003-PHC_WHITE3-publication_white_PHC_UAT-13', 
+		@enabled=1, 
+		@notify_level_eventlog=0, 
+		@notify_level_email=0, 
+		@notify_level_netsend=0, 
+		@notify_level_page=0, 
+		@delete_level=0, 
+		@description=N'No description available.', 
+		@category_name=N'REPL-Snapshot', 
+		@owner_login_name=N'distributor_admin', @job_id = @jobId OUTPUT
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+/****** Object:  Step [Snapshot Agent startup message.]    Script Date: 10/18/2017 10:58:59 AM ******/
+EXEC @ReturnCode = msdb.dbo.sp_add_jobstep @job_id=@jobId, @step_name=N'Snapshot Agent startup message.', 
+		@step_id=1, 
+		@cmdexec_success_code=0, 
+		@on_success_action=3, 
+		@on_success_step_id=0, 
+		@on_fail_action=3, 
+		@on_fail_step_id=0, 
+		@retry_attempts=0, 
+		@retry_interval=0, 
+		@os_run_priority=0, @subsystem=N'TSQL', 
+		@command=N'sp_MSadd_snapshot_history @perfmon_increment = 0,  @agent_id = 13, @runstatus = 1,  
+                    @comments = N''Starting agent.''', 
+		@server=N'SDDBSWHT003', 
+		@database_name=N'distribution_white_UAT', 
+		@flags=0
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+/****** Object:  Step [Run agent.]    Script Date: 10/18/2017 10:59:00 AM ******/
+EXEC @ReturnCode = msdb.dbo.sp_add_jobstep @job_id=@jobId, @step_name=N'Run agent.', 
+		@step_id=2, 
+		@cmdexec_success_code=0, 
+		@on_success_action=1, 
+		@on_success_step_id=0, 
+		@on_fail_action=3, 
+		@on_fail_step_id=0, 
+		@retry_attempts=10, 
+		@retry_interval=1, 
+		@os_run_priority=0, @subsystem=N'Snapshot', 
+		@command=N'-Publisher [SDDBSWHT003] -PublisherDB [PHC_WHITE3] -Distributor [SPDBWHTDIST] -Publication [publication_white_PHC_UAT] -DistributorSecurityMode 1 ', 
+		@server=N'SDDBSWHT003', 
+		@database_name=N'distribution_white_UAT', 
+		@flags=0, 
+		@proxy_name=N'[REPL][PHSABC\svc_SPDBWHTDIST_PHC][SDDBSWHT003-PHC_WHITE3-publication_white_PHC_UAT-13]'
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+/****** Object:  Step [Detect nonlogged agent shutdown.]    Script Date: 10/18/2017 10:59:00 AM ******/
+EXEC @ReturnCode = msdb.dbo.sp_add_jobstep @job_id=@jobId, @step_name=N'Detect nonlogged agent shutdown.', 
+		@step_id=3, 
+		@cmdexec_success_code=0, 
+		@on_success_action=2, 
+		@on_success_step_id=0, 
+		@on_fail_action=2, 
+		@on_fail_step_id=0, 
+		@retry_attempts=0, 
+		@retry_interval=0, 
+		@os_run_priority=0, @subsystem=N'TSQL', 
+		@command=N'sp_MSdetect_nonlogged_shutdown @subsystem = ''Snapshot'', @agent_id = 13', 
+		@server=N'SDDBSWHT003', 
+		@database_name=N'distribution_white_UAT', 
+		@flags=0
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+EXEC @ReturnCode = msdb.dbo.sp_update_job @job_id = @jobId, @start_step_id = 1
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+EXEC @ReturnCode = msdb.dbo.sp_add_jobschedule @job_id=@jobId, @name=N'Replication agent schedule.', 
+		@enabled=0, 
+		@freq_type=1, 
+		@freq_interval=0, 
+		@freq_subday_type=0, 
+		@freq_subday_interval=0, 
+		@freq_relative_interval=0, 
+		@freq_recurrence_factor=0, 
+		@active_start_date=20170524, 
+		@active_end_date=99991231, 
+		@active_start_time=0, 
+		@active_end_time=235959, 
+		@schedule_uid=N'14bce80e-7135-483e-8f33-176bb406c6ee'
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+EXEC @ReturnCode = msdb.dbo.sp_add_jobserver @job_id = @jobId, @server_name = N'(local)'
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+COMMIT TRANSACTION
+GOTO EndSave
+QuitWithRollback:
+    IF (@@TRANCOUNT > 0) ROLLBACK TRANSACTION
+EndSave:
+
+GO
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+USE [msdb]
+GO
+
+/****** Object:  Job [SDDBSWHT003-PHC_WHITE3-11]    Script Date: 10/18/2017 10:58:19 AM ******/
+BEGIN TRANSACTION
+DECLARE @ReturnCode INT
+SELECT @ReturnCode = 0
+/****** Object:  JobCategory [REPL-LogReader]    Script Date: 10/18/2017 10:58:19 AM ******/
+IF NOT EXISTS (SELECT name FROM msdb.dbo.syscategories WHERE name=N'REPL-LogReader' AND category_class=1)
+BEGIN
+EXEC @ReturnCode = msdb.dbo.sp_add_category @class=N'JOB', @type=N'LOCAL', @name=N'REPL-LogReader'
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+
+END
+
+DECLARE @jobId BINARY(16)
+EXEC @ReturnCode =  msdb.dbo.sp_add_job @job_name=N'SDDBSWHT003-PHC_WHITE3-11', 
+		@enabled=1, 
+		@notify_level_eventlog=0, 
+		@notify_level_email=0, 
+		@notify_level_netsend=0, 
+		@notify_level_page=0, 
+		@delete_level=0, 
+		@description=N'No description available.', 
+		@category_name=N'REPL-LogReader', 
+		@owner_login_name=N'distributor_admin', @job_id = @jobId OUTPUT
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+/****** Object:  Step [Log Reader Agent startup message.]    Script Date: 10/18/2017 10:58:20 AM ******/
+EXEC @ReturnCode = msdb.dbo.sp_add_jobstep @job_id=@jobId, @step_name=N'Log Reader Agent startup message.', 
+		@step_id=1, 
+		@cmdexec_success_code=0, 
+		@on_success_action=3, 
+		@on_success_step_id=0, 
+		@on_fail_action=3, 
+		@on_fail_step_id=0, 
+		@retry_attempts=0, 
+		@retry_interval=0, 
+		@os_run_priority=0, @subsystem=N'TSQL', 
+		@command=N'sp_MSadd_logreader_history @perfmon_increment = 0, @agent_id = 11, @runstatus = 1, 
+                    @comments = N''Starting agent.''', 
+		@server=N'SDDBSWHT003', 
+		@database_name=N'distribution_white_UAT', 
+		@flags=0
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+/****** Object:  Step [Run agent.]    Script Date: 10/18/2017 10:58:20 AM ******/
+EXEC @ReturnCode = msdb.dbo.sp_add_jobstep @job_id=@jobId, @step_name=N'Run agent.', 
+		@step_id=2, 
+		@cmdexec_success_code=0, 
+		@on_success_action=1, 
+		@on_success_step_id=0, 
+		@on_fail_action=3, 
+		@on_fail_step_id=0, 
+		@retry_attempts=2147483647, 
+		@retry_interval=1, 
+		@os_run_priority=0, @subsystem=N'LogReader', 
+		@command=N'-Publisher [SDDBSWHT003] -PublisherDB [PHC_WHITE3] -Distributor [SPDBWHTDIST] -DistributorSecurityMode 1  -Continuous', 
+		@server=N'SDDBSWHT003', 
+		@database_name=N'distribution_white_UAT', 
+		@flags=0, 
+		@proxy_name=N'[REPL][PHSABC\svc_SPDBWHTDIST_PHC][SDDBSWHT003-PHC_WHITE3-11]'
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+/****** Object:  Step [Detect nonlogged agent shutdown.]    Script Date: 10/18/2017 10:58:20 AM ******/
+EXEC @ReturnCode = msdb.dbo.sp_add_jobstep @job_id=@jobId, @step_name=N'Detect nonlogged agent shutdown.', 
+		@step_id=3, 
+		@cmdexec_success_code=0, 
+		@on_success_action=2, 
+		@on_success_step_id=0, 
+		@on_fail_action=2, 
+		@on_fail_step_id=0, 
+		@retry_attempts=0, 
+		@retry_interval=0, 
+		@os_run_priority=0, @subsystem=N'TSQL', 
+		@command=N'sp_MSdetect_nonlogged_shutdown @subsystem = ''LogReader'', @agent_id = 11', 
+		@server=N'SDDBSWHT003', 
+		@database_name=N'distribution_white_UAT', 
+		@flags=0
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+EXEC @ReturnCode = msdb.dbo.sp_update_job @job_id = @jobId, @start_step_id = 1
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+EXEC @ReturnCode = msdb.dbo.sp_add_jobschedule @job_id=@jobId, @name=N'Replication agent schedule.', 
+		@enabled=1, 
+		@freq_type=64, 
+		@freq_interval=0, 
+		@freq_subday_type=0, 
+		@freq_subday_interval=0, 
+		@freq_relative_interval=0, 
+		@freq_recurrence_factor=0, 
+		@active_start_date=20170524, 
+		@active_end_date=99991231, 
+		@active_start_time=0, 
+		@active_end_time=235959, 
+		@schedule_uid=N'b8c88132-2ec7-4e21-910b-a6582074d595'
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+EXEC @ReturnCode = msdb.dbo.sp_add_jobserver @job_id = @jobId, @server_name = N'(local)'
+IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
+COMMIT TRANSACTION
+GOTO EndSave
+QuitWithRollback:
+    IF (@@TRANCOUNT > 0) ROLLBACK TRANSACTION
+EndSave:
+
+GO
+
+
