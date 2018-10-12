@@ -1,4 +1,59 @@
-﻿ /****** Object:  LinkedServer [vchpsphrdb02]    Script Date: 06/21/2012 13:26:55 ******/
+﻿ 
+ ---  set up a default linked server
+ USE [master]
+go
+
+declare @server_name varchar(256)
+
+set @server_name = 'SPDBSRES048'
+
+EXEC master.dbo.sp_addlinkedserver @server = @server_name, @srvproduct=N'SQL Server'
+
+
+EXEC master.dbo.sp_serveroption @server=@server_name, @optname=N'collation compatible', @optvalue=N'false'
+
+EXEC master.dbo.sp_serveroption @server=@server_name, @optname=N'data access', @optvalue=N'true'
+
+EXEC master.dbo.sp_serveroption @server=@server_name, @optname=N'dist', @optvalue=N'false'
+
+EXEC master.dbo.sp_serveroption @server=@server_name, @optname=N'pub', @optvalue=N'false'
+
+EXEC master.dbo.sp_serveroption @server=@server_name, @optname=N'rpc', @optvalue=N'false'
+
+EXEC master.dbo.sp_serveroption @server=@server_name, @optname=N'rpc out', @optvalue=N'false'
+
+EXEC master.dbo.sp_serveroption @server=@server_name, @optname=N'sub', @optvalue=N'false'
+
+EXEC master.dbo.sp_serveroption @server=@server_name, @optname=N'connect timeout', @optvalue=N'0'
+
+EXEC master.dbo.sp_serveroption @server=@server_name, @optname=N'collation name', @optvalue=null
+
+EXEC master.dbo.sp_serveroption @server=@server_name, @optname=N'lazy schema validation', @optvalue=N'false'
+
+EXEC master.dbo.sp_serveroption @server=@server_name, @optname=N'query timeout', @optvalue=N'0'
+
+EXEC master.dbo.sp_serveroption @server=@server_name, @optname=N'use remote collation', @optvalue=N'true'
+
+EXEC master.dbo.sp_serveroption @server=@server_name, @optname=N'remote proc transaction promotion', @optvalue=N'true'
+
+USE [master]
+
+EXEC master.dbo.sp_addlinkedsrvlogin @rmtsrvname = @server_name, @locallogin = NULL , @useself = N'True'
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ /****** Object:  LinkedServer [vchpsphrdb02]    Script Date: 06/21/2012 13:26:55 ******/
 EXEC master.dbo.sp_addlinkedserver @server = N'vchpsphrdb02', @srvproduct=N'SQL Server'
  /* For security reasons the linked server remote logins password is changed with ######## */
 EXEC master.dbo.sp_addlinkedsrvlogin @rmtsrvname=N'vchpsphrdb02',@useself=N'False',@locallogin=N'vchweb',@rmtuser=N'awpread',@rmtpassword='readawp'

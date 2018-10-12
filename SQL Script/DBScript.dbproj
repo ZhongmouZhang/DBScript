@@ -1852,6 +1852,12 @@
     <NotInBuild Include="Frequently Used Script\Query_Listening_Port.sql">
       <SubType>NotInBuild</SubType>
     </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Query_CMDB.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Frequently Used Script\Query_SCOM.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
   </ItemGroup>
   <ItemGroup>
     <BuildContributorArgument Include="OutDir=$(OutDir)" />

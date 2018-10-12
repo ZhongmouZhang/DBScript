@@ -1,0 +1,29 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Drop
+       [dbo].[sp_PingSQLServers] (Procedure)
+       [SqlServerProject] (Assembly)
+     Create
+       [SqlServerProject] (Assembly)
+       [dbo].[sp_PingSQLServers] (Procedure)
+
+** Supporting actions
+     Drop
+       [dbo].[fn_InstanceFqn] (Function)
+       [dbo].[fn_InstanceIP] (Function)
+       [dbo].[fn_PingSQL] (Function)
+       [dbo].[fn_PingHost] (Function)
+     Create
+       [dbo].[fn_InstanceFqn] (Function)
+       [dbo].[fn_InstanceIP] (Function)
+       [dbo].[fn_PingSQL] (Function)
+       [dbo].[fn_PingHost] (Function)

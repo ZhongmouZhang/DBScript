@@ -1,0 +1,23 @@
+C:\Users\JZ1337_SA\Documents\Development\SqlServerProject\bin\Debug\SqlServerProject.dacpac
+C:\Users\JZ1337_SA\Documents\Development\SqlServerProject\obj\Debug\SqlServerProject.dll
+C:\Users\JZ1337_SA\Documents\Development\SqlServerProject\obj\Debug\SqlServerProject.pdb
+C:\Users\JZ1337_SA\Documents\Development\SqlServerProject\bin\Debug\SqlServerProject.dll
+C:\Users\JZ1337_SA\Documents\Development\SqlServerProject\bin\Debug\SqlServerProject.pdb
+C:\Users\JZ1337_SA\Documents\Development\SqlServerProject - V4\bin\Debug\SqlServerProject.dacpac
+C:\Users\JZ1337_SA\Documents\Development\SqlServerProject - V4\bin\Debug\SqlServerProject.dll
+C:\Users\JZ1337_SA\Documents\Development\SqlServerProject - V4\bin\Debug\SqlServerProject.pdb
+C:\Users\JZ1337_SA\Documents\Development\SqlServerProject - V4\obj\Debug\SqlServerProject.dll
+C:\Users\JZ1337_SA\Documents\Development\SqlServerProject - V4\obj\Debug\SqlServerProject.pdb
+C:\Users\JZ1337_SA\Documents\Development\SqlServerProject - V4\obj\Debug\Model.xml
+C:\Users\JZ1337_SA\Documents\Development\SqlServerProject - V4\obj\Debug\refactor.xml
+C:\Users\JZ1337_SA\Documents\Development\SqlServerProject - V4\obj\Debug\postdeploy.sql
+C:\Users\JZ1337_SA\Documents\Development\SqlServerProject - V4\obj\Debug\predeploy.sql
+C:\Users\Public\Projects\SqlServerProject\obj\Debug\SqlServerProject.dll
+C:\Users\Public\Projects\SqlServerProject\bin\Debug\SqlServerProject.dacpac
+C:\Users\Public\Projects\SqlServerProject\bin\Debug\SqlServerProject.dll
+C:\Users\Public\Projects\SqlServerProject\bin\Debug\SqlServerProject.pdb
+C:\Users\Public\Projects\SqlServerProject\obj\Debug\SqlServerProject.pdb
+C:\Users\Public\Projects\SqlServerProject\obj\Debug\Model.xml
+C:\Users\Public\Projects\SqlServerProject\obj\Debug\refactor.xml
+C:\Users\Public\Projects\SqlServerProject\obj\Debug\postdeploy.sql
+C:\Users\Public\Projects\SqlServerProject\obj\Debug\predeploy.sql

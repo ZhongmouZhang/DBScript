@@ -1,0 +1,42 @@
+<DataItem type="Microsoft.Windows.EventData" time="2017-06-09T12:30:01.0000000-07:00" sourceHealthServiceId="22E9E5F4-38E3-056F-FF70-4F8AEBB423A7">
+    <EventOriginId>{3DE78037-E472-4209-B3A7-29E98046AEA3}</EventOriginId>
+    <PublisherId>{B3CE8F85-4356-7C29-DCE7-4166EB6D9A09}</PublisherId>
+    <PublisherName>MSSQL$SQL2008R2</PublisherName>
+    <EventSourceName>MSSQL$SQL2008R2</EventSourceName>
+    <Channel>Application</Channel>
+    <LoggingComputer>sddbs013.healthbc.org</LoggingComputer>
+    <EventNumber>3221243676</EventNumber>
+    <EventCategory>2</EventCategory>
+    <EventLevel>1</EventLevel>
+    <UserName>HEALTHBC\SVC_SDDBS013_SQL</UserName>
+    <RawDescription>
+        <![CDATA[%1!s!: Backup device '%2!s!' failed to %3!s!. Operating system error %4!s!.
+            ]]>
+    </RawDescription>
+    <LCID>1033</LCID>
+    <CollectDescription Type="Boolean">true</CollectDescription>
+    <Params>
+        <Param>BackupDiskFile::CreateMedia</Param>
+        <Param>K:\SQL_Backup\ReportServer\ReportServer_Log_20170609_123000.trn</Param>
+        <Param>create</Param>
+        <Param>3(The system cannot find the path specified.)</Param>
+        <Param>-</Param>
+    </Params>
+    <EventData>
+        <DataItem type="System.XmlData" time="2017-06-09T12:30:01.3187361-07:00" sourceHealthServiceId="22E9E5F4-38E3-056F-FF70-4F8AEBB423A7">
+            <EventData xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+                <Data>BackupDiskFile::CreateMedia</Data>
+                <Data>K:\SQL_Backup\ReportServer\ReportServer_Log_20170609_123000.trn</Data>
+                <Data>create</Data>
+                <Data>3(The system cannot find the path specified.)</Data>
+                <Binary>1C4700001000000013000000530044004400420053003000310033005C00530051004C00320030003000380052003200000000000000</Binary>
+            </EventData>
+        </DataItem>
+    </EventData>
+    <EventDisplayNumber>18204</EventDisplayNumber>
+    <EventDescription>
+        <![CDATA[BackupDiskFile::CreateMedia: Backup device 'K:\SQL_Backup\ReportServer\ReportServer_Log_20170609_123000.trn' failed to create. Operating system error 3(The system cannot find the path specified.).
+            ]]>
+    </EventDescription>
+    <Keywords>36028797018963968</Keywords>
+</DataItem>

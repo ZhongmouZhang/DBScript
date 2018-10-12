@@ -1,0 +1,35 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Drop
+       [dbo].[sp_RunQuerySQLServers] (Procedure)
+       [SqlServerProject] (Assembly)
+     Create
+       [SqlServerProject] (Assembly)
+       [dbo].[sp_RunQuerySQLServers] (Procedure)
+       [dbo].[sp_RunQuerySQLServersOld] (Procedure)
+
+** Supporting actions
+     Drop
+       [dbo].[fn_InstanceIP] (Function)
+       [dbo].[fn_InstanceFqn] (Function)
+       [dbo].[fn_PingHost] (Function)
+       [dbo].[fn_PingSQL] (Function)
+       [dbo].[sp_PingSQLServers] (Procedure)
+     Create
+       [dbo].[fn_InstanceIP] (Function)
+       [dbo].[fn_InstanceFqn] (Function)
+       [dbo].[fn_PingHost] (Function)
+       [dbo].[fn_PingSQL] (Function)
+       [dbo].[sp_PingSQLServers] (Procedure)
+
+If this deployment is executed, changes to [dbo].[sp_RunQuerySQLServers] might introduce run-time errors in [dbo].[TEST].
+

@@ -1,0 +1,4 @@
+\\Client\C$\support\Projects\Development\SqlServerProject\bin\Debug\SqlServerProject.dll
+\\Client\C$\support\Projects\Development\SqlServerProject\bin\Debug\SqlServerProject.pdb
+\\Client\C$\support\Projects\Development\SqlServerProject\obj\Debug\SqlServerProject.dll
+\\Client\C$\support\Projects\Development\SqlServerProject\obj\Debug\SqlServerProject.pdb
