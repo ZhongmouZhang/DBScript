@@ -1,0 +1,8 @@
+"mssql.connections": [
+    {
+      "server": "{{ZVMSQ2K8R2}}",
+      "database": "{{master}}",
+      "user": "{{put-username-here}}",
+      "password": "{{put-password-here}}"
+    }
+  ]

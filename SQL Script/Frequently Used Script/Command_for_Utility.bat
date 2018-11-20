@@ -1,0 +1,7 @@
+
+
+## SQL client configuration
+
+cliconfg
+
+
