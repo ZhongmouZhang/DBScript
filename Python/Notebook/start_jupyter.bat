@@ -1,0 +1,1 @@
+jupyter notebook --notebook-dir=Documents\GitHub\DBScript\Python\Notebook\
