@@ -11,8 +11,8 @@
   DTS:LocaleID="4105"
   DTS:ObjectName="Test_Foreach_Loop"
   DTS:PackageType="5"
-  DTS:VersionBuild="2"
-  DTS:VersionGUID="{EBBCFD68-D918-4ED8-8156-8A48EF1CD5AD}">
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{94B6FEE4-0D96-4FE7-9AB9-3CD50A4AA346}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -387,6 +387,17 @@
   <DTS:Variables>
     <DTS:Variable
       DTS:CreationName=""
+      DTS:DTSID="{DD15BDCD-3356-4DE5-9A86-23F592A522F9}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::FilePath]+ &quot;\\LoadedIntoDB\\&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="DestinationFolder">
+      <DTS:VariableValue
+        DTS:DataType="8">\\srvnetapp01\sql_back$\CMS\LoadedIntoDB\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
       DTS:DTSID="{27F64BF1-47DF-45DD-9F98-AA2857D4152B}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
@@ -403,6 +414,17 @@
       DTS:ObjectName="FilePath">
       <DTS:VariableValue
         DTS:DataType="8">\\srvnetapp01\sql_back$\CMS</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{FA1DC93C-2DDF-4B8B-85C2-884B82E07685}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::FilePath]+ &quot;\\&quot;+ @[User::FileName]+&quot;.txt&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceFile">
+      <DTS:VariableValue
+        DTS:DataType="8">\\srvnetapp01\sql_back$\CMS\.txt</DTS:VariableValue>
     </DTS:Variable>
   </DTS:Variables>
   <DTS:Executables>
@@ -3182,7 +3204,37 @@
             </pipeline>
           </DTS:ObjectData>
         </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\File System Task"
+          DTS:CreationName="Microsoft.FileSystemTask"
+          DTS:Description="File System Task"
+          DTS:DTSID="{10D3974C-8C3F-47E2-B855-94937AB877D6}"
+          DTS:ExecutableType="Microsoft.FileSystemTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="File System Task"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOperationType="MoveFile"
+              TaskOverwriteDestFile="True"
+              TaskSourcePath="User::SourceFile"
+              TaskIsSourceVariable="True"
+              TaskDestinationPath="User::DestinationFolder"
+              TaskIsDestinationVariable="True" />
+          </DTS:ObjectData>
+        </DTS:Executable>
       </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{3AD0FB67-36CC-4408-8C6F-14D242734C01}"
+          DTS:From="Package\Foreach Loop Container\Data Flow Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Foreach Loop Container\File System Task" />
+      </DTS:PrecedenceConstraints>
       <DTS:ForEachVariableMappings>
         <DTS:ForEachVariableMapping
           DTS:CreationName=""
@@ -3204,16 +3256,42 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="150.4,41.6"
           Id="Package\Foreach Loop Container\Data Flow Task"
           TopLeft="36.6857187524135,19.5294143386366" />
+        <NodeLayout
+          Size="156.8,41.6"
+          Id="Package\Foreach Loop Container\File System Task"
+          TopLeft="37.2571473335735,99.2470625042504" />
+        <EdgeLayout
+          Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint]"
+          TopLeft="113.771433042994,61.1294143386366">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38.1176481656138"
+              Start="0,0"
+              End="0,30.6176481656138">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.6176481656138" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="261.6,116"
-          Size="261.6,159.2"
+          PanelSize="280.8,192"
+          Size="280.8,235.2"
           Id="Package\Foreach Loop Container"
           TopLeft="225.714289558177,120.517648749038" />
       </GraphLayout>
@@ -3225,9 +3303,25 @@
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination"
+          TopLeft="128.000002179827,312.000004375682" />
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\Foreach Loop Container\Data Flow Task\Derived Column"
+          TopLeft="344.571434439445,188.329413609356" />
+        <NodeLayout
           Size="150.4,41.6"
           Id="Package\Foreach Loop Container\Data Flow Task\Flat File Source"
           TopLeft="5.5,5.5" />
+        <NodeLayout
+          Size="224.8,41.6"
+          Id="Package\Foreach Loop Container\Data Flow Task\Derived Column For Good Data"
+          TopLeft="58.2857152783142,182.917649624175" />
+        <NodeLayout
+          Size="179.2,41.6"
+          Id="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination 1"
+          TopLeft="336.000005722046,307.62353365875" />
         <NodeLayout
           Size="155.2,41.6"
           Id="Package\Foreach Loop Container\Data Flow Task\Data Conversion"
@@ -3238,26 +3332,26 @@
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="72.3285727131124,64.2411780321062"
+              EndConnector="72.3285727131124,64.241178032106"
               Start="0,0"
-              End="72.3285727131124,56.7411780321062">
+              End="72.3285727131124,56.741178032106">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,28.1205890160531" />
+                    End="0,28.120589016053" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,28.1205890160531"
-                    Point2="0,32.1205890160531"
-                    Point3="4,32.1205890160531" />
+                    Point1="0,28.120589016053"
+                    Point2="0,32.120589016053"
+                    Point3="4,32.120589016053" />
                   <mssgle:LineSegment
-                    End="68.3285727131124,32.1205890160531" />
+                    End="68.3285727131124,32.120589016053" />
                   <mssgle:CubicBezierSegment
-                    Point1="68.3285727131124,32.1205890160531"
-                    Point2="72.3285727131124,32.1205890160531"
-                    Point3="72.3285727131124,36.1205890160531" />
+                    Point1="68.3285727131124,32.120589016053"
+                    Point2="72.3285727131124,32.120589016053"
+                    Point3="72.3285727131124,36.120589016053" />
                   <mssgle:LineSegment
-                    End="72.3285727131124,56.7411780321062" />
+                    End="72.3285727131124,56.741178032106" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3266,36 +3360,20 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="224.8,41.6"
-          Id="Package\Foreach Loop Container\Data Flow Task\Derived Column For Good Data"
-          TopLeft="58.2857152783142,182.917649624175" />
         <EdgeLayout
-          Id="Package\Foreach Loop Container\Data Flow Task.Paths[Data Conversion Output]"
-          TopLeft="128.495239379779,152.941178032106">
+          Id="Package\Foreach Loop Container\Data Flow Task.Paths[Derived Column Output1]"
+          TopLeft="423.285720080746,229.929413609356">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="42.1904758985351,29.9764715920683"
+              EndConnector="0,77.6941200493941"
               Start="0,0"
-              End="42.1904758985351,22.4764715920683">
+              End="0,70.1941200493941">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,8.17411805473794" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,8.17411805473794"
-                    Point2="0,12.1741180547379"
-                    Point3="4,12.1741180547379" />
-                  <mssgle:LineSegment
-                    End="38.1904758985351,12.1741180547379" />
-                  <mssgle:CubicBezierSegment
-                    Point1="38.1904758985351,12.1741180547379"
-                    Point2="42.1904758985351,12.1741180547379"
-                    Point3="42.1904758985351,16.1741180547379" />
-                  <mssgle:LineSegment
-                    End="42.1904758985351,22.4764715920683" />
+                    End="0,70.1941200493941" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3304,50 +3382,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="152.8,41.6"
-          Id="Package\Foreach Loop Container\Data Flow Task\Derived Column"
-          TopLeft="344.571434439445,188.329413609356" />
-        <EdgeLayout
-          Id="Package\Foreach Loop Container\Data Flow Task.Paths[Data Conversion Error Output]"
-          TopLeft="177.561906046446,152.941178032106">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="243.409528393,35.38823557725"
-              Start="0,0"
-              End="243.409528393,27.88823557725">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,10.3719568976995" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,10.3719568976995"
-                    Point2="0,14.3719568976995"
-                    Point3="4,14.3719568976995" />
-                  <mssgle:LineSegment
-                    End="239.409528393,14.3719568976995" />
-                  <mssgle:CubicBezierSegment
-                    Point1="239.409528393,14.3719568976995"
-                    Point2="243.409528393,14.3719568976995"
-                    Point3="243.409528393,18.3719568976995" />
-                  <mssgle:LineSegment
-                    End="243.409528393,27.88823557725" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="55.6183774777498,19.3719568976995,132.1727734375,11.43359375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="170.4,41.6"
-          Id="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination"
-          TopLeft="128.000002179827,312.000004375682" />
         <EdgeLayout
           Id="Package\Foreach Loop Container\Data Flow Task.Paths[Derived Column Output]"
           TopLeft="170.685715278314,224.517649624175">
@@ -3382,30 +3416,74 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="179.2,41.6"
-          Id="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination 1"
-          TopLeft="336.000005722046,307.62353365875" />
         <EdgeLayout
-          Id="Package\Foreach Loop Container\Data Flow Task.Paths[Derived Column Output1]"
-          TopLeft="423.285720080746,229.929413609356">
+          Id="Package\Foreach Loop Container\Data Flow Task.Paths[Data Conversion Output]"
+          TopLeft="128.495239379779,152.941178032106">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,77.6941200493941"
+              EndConnector="42.1904758985351,29.9764715920683"
               Start="0,0"
-              End="0,70.1941200493941">
+              End="42.1904758985351,22.4764715920683">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,70.1941200493941" />
+                    End="0,8.17411805473794" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,8.17411805473794"
+                    Point2="0,12.1741180547379"
+                    Point3="4,12.1741180547379" />
+                  <mssgle:LineSegment
+                    End="38.1904758985351,12.1741180547379" />
+                  <mssgle:CubicBezierSegment
+                    Point1="38.1904758985351,12.1741180547379"
+                    Point2="42.1904758985351,12.1741180547379"
+                    Point3="42.1904758985351,16.1741180547379" />
+                  <mssgle:LineSegment
+                    End="42.1904758985351,22.4764715920683" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\Data Flow Task.Paths[Data Conversion Error Output]"
+          TopLeft="177.561906046446,152.941178032106">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="243.409528393,35.38823557725"
+              Start="0,0"
+              End="243.409528393,27.88823557725">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,10.3719568976995" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,10.3719568976995"
+                    Point2="0,14.3719568976995"
+                    Point3="4,14.3719568976995" />
+                  <mssgle:LineSegment
+                    End="239.409528393,14.3719568976995" />
+                  <mssgle:CubicBezierSegment
+                    Point1="239.409528393,14.3719568976995"
+                    Point2="243.409528393,14.3719568976995"
+                    Point3="243.409528393,18.3719568976995" />
+                  <mssgle:LineSegment
+                    End="243.409528393,27.88823557725" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="55.6183774777498,19.3719568976995,132.1727734375,11.43359375"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
