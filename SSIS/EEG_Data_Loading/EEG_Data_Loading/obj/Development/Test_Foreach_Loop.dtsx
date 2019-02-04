@@ -11,8 +11,8 @@
   DTS:LocaleID="4105"
   DTS:ObjectName="Test_Foreach_Loop"
   DTS:PackageType="5"
-  DTS:VersionBuild="3"
-  DTS:VersionGUID="{94B6FEE4-0D96-4FE7-9AB9-3CD50A4AA346}">
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{77EAFA03-B8FE-484F-A5E0-1A7B5C41C652}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
