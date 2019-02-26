@@ -7,10 +7,11 @@ database = 'EEG_Data'
 cnxn = pd.connect('DRIVER={ODBC Driver 13 for SQL Server};SERVER='+server+';DATABASE='+database+';Trusted_Connection=Yes')
 cursor = cnxn.cursor()
 
-directory = '//srvnetapp01/sql_back$/CMS/C2/'
-flag_begin = 0
+directory = '//srvnetapp01/sql_back$/CMS/Tags/'
+
 
 for filename in os.listdir(directory):
+    flag_begin = 0
     if filename.endswith(".txt"):
         new_name = directory + filename
         with open(new_name, encoding='utf-16') as f:
@@ -22,8 +23,7 @@ for filename in os.listdir(directory):
                     flag_begin = 1
                 elif flag_begin == 1:
                     tag_datetime = datetime.combine(datetime.date(scan_date), datetime.time(datetime.strptime(words[0], '%H:%M:%S')))
-                    cursor.execute("insert into tbl_scan_data_tag (file_name, scan_datatime, duration, title) values (?,?,?,?)"
-                                    , filename, tag_datetime, words[1], words[2])
+                    cursor.execute("insert into tbl_scan_data_tag (file_name, scan_datetime, duration, title) values (?,?,?,?)" , filename.replace('.txt',''), tag_datetime, words[1], words[2])
                     cnxn.commit()
         continue
     else:
