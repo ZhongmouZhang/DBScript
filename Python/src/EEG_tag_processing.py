@@ -14,6 +14,7 @@ for filename in os.listdir(directory):
     flag_begin = 0
     if filename.endswith(".txt"):
         new_name = directory + filename
+        scan_date = None
         with open(new_name, encoding='utf-16') as f:
             for line in f:
                 words = line.rstrip().split('\t')
@@ -22,6 +23,8 @@ for filename in os.listdir(directory):
                 elif "Time" in words[0] and "Duration" in words[1] and "Title" in words[2]:
                     flag_begin = 1
                 elif flag_begin == 1:
+                    if scan_date is None:
+                        scan_date = datetime.strptime('00:00:00 Jan 01, 1900', '%H:%M:%S %b %d, %Y')
                     tag_datetime = datetime.combine(datetime.date(scan_date), datetime.time(datetime.strptime(words[0], '%H:%M:%S')))
                     cursor.execute("insert into tbl_scan_data_tag (file_name, scan_datetime, duration, title) values (?,?,?,?)" , filename.replace('.txt',''), tag_datetime, words[1], words[2])
                     cnxn.commit()
