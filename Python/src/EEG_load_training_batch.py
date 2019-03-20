@@ -9,7 +9,7 @@ def load_mini_batch_of_ten_second (cursor, batch_number):
     id, tagged, _ = cursor.fetchone()
     cursor.nextset()
     rows=cursor.fetchall()
-    X = np.array(rows, float).reshape((5120, 19, 1))
+    X = np.array(rows, float).reshape((1,5120, 19))
 
     if tagged == 'Y':
         Y = [[1]]
@@ -23,12 +23,12 @@ def load_mini_batch_of_ten_second (cursor, batch_number):
         if tagged is not None:
             cursor.nextset()
             rows=cursor.fetchall()
-            array = np.array(rows, float).reshape((5120, 19, 1))
-            X = np.append(X,array, axis = 2)
+            array = np.array(rows, float).reshape((1, 5120, 19))
+            X = np.append(X,array, axis = 0)
             if tagged == 'Y':
-                Y = np.append(Y,[[1]],axis=1)
+                Y = np.append(Y,[[1]],axis=0)
             else:
-                Y = np.append(Y,[[0]], axis = 1)
+                Y = np.append(Y,[[0]], axis = 0)
 
     return (X,Y)
 
@@ -41,7 +41,7 @@ def load_mini_batch_of_one_second (cursor, batch_number):
     id, tagged, _ = cursor.fetchone()
     cursor.nextset()
     rows=cursor.fetchall()
-    X = np.array(rows, float).reshape((512, 19, 1))
+    X = np.array(rows, float).reshape((1, 512, 19))
 
     if tagged == 'Y':
         Y = [[1]]
@@ -55,12 +55,12 @@ def load_mini_batch_of_one_second (cursor, batch_number):
         if tagged is not None:
             cursor.nextset()
             rows=cursor.fetchall()
-            array = np.array(rows, float).reshape((512, 19, 1))
-            X = np.append(X,array, axis = 2)
+            array = np.array(rows, float).reshape((1, 512, 19))
+            X = np.append(X,array, axis = 0)
             if tagged == 'Y':
-                Y = np.append(Y,[[1]],axis=1)
+                Y = np.append(Y,[[1]],axis=0)
             else:
-                Y = np.append(Y,[[0]], axis = 1)
+                Y = np.append(Y,[[0]], axis = 0)
 
     return (X,Y)
 
