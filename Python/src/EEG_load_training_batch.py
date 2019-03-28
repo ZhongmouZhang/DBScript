@@ -2,7 +2,7 @@ import pyodbc as pd
 import numpy as np
 
 
-def load_mini_batch_of_ten_second (cursor, batch_number):
+def load_batch_of_ten_second (cursor, batch_number):
     #Call a stored procedure
     id = 0
     cursor.execute("{CALL sp_load_training_sample_of_ten_second (@batch_number=?, @id=?)}", (batch_number, id)) 
@@ -33,7 +33,7 @@ def load_mini_batch_of_ten_second (cursor, batch_number):
     return (X,Y)
 
 
-def load_mini_batch_of_one_second (cursor, batch_number):
+def load_batch_of_one_second (cursor, batch_number):
 
     #Call a stored procedure
     id = 0
@@ -62,6 +62,20 @@ def load_mini_batch_of_one_second (cursor, batch_number):
             else:
                 Y = np.append(Y,[[0]], axis = 0)
 
+    return (X,Y)
+
+
+def load_sample_of_one_second_randomly (cursor, batch_number = 0, tagged = '', swapped = ''):
+    cursor.execute("{CALL sp_load_training_sample_of_one_second_randomly (@batch_number=?, @tagged=?, @swappe=?)}", (batch_number, tagged, swapped)) 
+    id, tagged, _ = cursor.fetchone()
+    cursor.nextset()
+    rows=cursor.fetchall()
+    X = np.array(rows, float).reshape((1, 512, 19))
+
+    if tagged == 'Y':
+        Y = [[1]]
+    else:
+        Y = [[0]]
     return (X,Y)
 
 
